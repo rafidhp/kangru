@@ -13,6 +13,15 @@
 
 Kangru is a platform that helps individuals find their identity and choose a future career that suits their interests, talents and potential.
 
+## 🤝 Contribution
+
+This project adopts the Kangru <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>.
+Want to contribute? Feel free to fork this repo and create a pull request, or open an issue if you find a bug or new idea.
+
 ## 📃 License
 
 Kangru is an open source software licensed under the <a href="LICENSE">MIT LICENSE</a>.
+
+## 🛡️ Security
+
+For security concerns, please refer to our [SECURITY policy](SECURITY.md).
