@@ -7,6 +7,12 @@
     <a href="https://opensource.org/licenses/MIT">
         <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
     </a>
+    <a href="https://www.contributor-covenant.org/version/2/0/code_of_conduct/">
+    <img src="https://img.shields.io/badge/Code%20of%20Conduct-Contributor%20Covenant-ff69b4.svg" alt="Code of Conduct">
+  </a>
+  <a href="./SECURITY.md">
+    <img src="https://img.shields.io/badge/🔒%20Security-Policy-blue?style=flat-square" alt="Security Policy">
+  </a>
 </p>
 
 ## Kangru
