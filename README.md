@@ -19,6 +19,32 @@
 
 Kangru is a platform that helps individuals find their identity and choose a future career that suits their interests, talents and potential.
 
+## Installation
+
+Build Kangru from the source and install dependencies:
+
+# 1. Clone Repository
+```bash
+git clone https://github.com/rafidhp/kangru
+```
+
+# 2. Navigate to the project directory
+```bash
+cd kangru
+```
+
+# 3. Installation Dependencies
+
+<b>Using <a href="https://www.npmjs.com">npm</a></b>
+```bash
+npm install
+```
+
+<b>Using <a href="https://www.php.net">composer</a></b>
+```bash
+composer install
+```
+
 ## 🤝 Contribution
 
 This project adopts the Kangru <a href="CODE_OF_CONDUCT.md">Code of Conduct</a>.
