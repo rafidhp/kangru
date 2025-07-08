@@ -1,10 +1,6 @@
 {
   "preset": "laravel",
   "rules": {
-    "indentation_type": true,
-    "indentation": {
-      "type": "spaces",
-      "size": 2
-    }
+    "indentation_type": true
   }
 }

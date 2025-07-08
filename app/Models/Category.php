@@ -10,11 +10,13 @@ class Category extends Model
     use HasFactory;
 
     protected $table = 'categories';
+
     protected $fillable = [
         'category',
     ];
 
-    public function mentor() {
+    public function mentor()
+    {
         return $this->belongTo(Mentor::class);
     }
 }

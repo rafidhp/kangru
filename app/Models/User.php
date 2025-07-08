@@ -44,7 +44,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function mentor() {
+    public function mentor()
+    {
         return $this->belongsTo(Mentor::class);
     }
 }
