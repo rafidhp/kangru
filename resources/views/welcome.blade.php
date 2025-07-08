@@ -8,6 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1 class="text-[#ffffff]">hello world!</h1>
+    <h1 class="text-[#999000]">hello world!</h1>
 </body>
 </html>
