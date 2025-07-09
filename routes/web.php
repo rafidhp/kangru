@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,4 +25,9 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->name('auth.register');
     Route::post('/register/post', 'postregister')->name('auth.postregister');
     Route::get('/logout', 'logout')->name('auth.logout');
+});
+
+Route::controller(TestController::class)->middleware('auth')->group(function () {
+    Route::get('/mbti-test', 'index')->name('mbti_test');
+    Route::post('/mbti-test/store', 'store')->name('mbti_test.store');
 });
