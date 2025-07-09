@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function mentor()
     {
         return $this->belongsTo(Mentor::class);
+    }
+
+    public function usersAchievement()
+    {
+        return $this->belongsTo(UsersAchievement::class);
     }
 }

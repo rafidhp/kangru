@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Document</title>
 </head>
+
 <body>
-    <h1 class="text-[#999000]">hello world!</h1>
+    @if (Auth::check())
+        <h1 class="text-[#999000]">hello world {{ Auth::user()->name }}!</h1>
+        <br>
+        <a href="{{ route('auth.logout') }}">Logout</a>
+    @else
+        <h1 class="text-[#999000]">hello world!</h1>
+        <br>
+        <a href="{{ route('auth.login') }}">Login</a>
+    @endif
 </body>
+
 </html>

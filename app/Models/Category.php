@@ -12,7 +12,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'category',
+        'category_name',
     ];
 
     public function mentor()
