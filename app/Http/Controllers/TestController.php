@@ -108,7 +108,7 @@ class TestController extends Controller
         $description = trim($response2->json('candidates.0.content.parts.0.text'));
 
         // prompt and response 3
-        $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, \n {$answersText} dan data yang saya miliki terutama pada pertanyaan nomor 9-15, berikan saran dan rekomendasi lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? (jika terdapat unsur olahraga, tidak menutup kemungkinan untuk menjadi atlet). Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
+        $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, \n {$answersText} dan data yang saya miliki terutama pada pertanyaan nomor 9-15, berikan saran dan rekomendasi lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? (contohnya jika terdapat unsur olahraga, tidak menutup kemungkinan untuk menjadi atlet, dan untuk unsur yang lainnya pun begitu). Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
         $response3 = Http::post($api_url, [
             'contents' => [['parts' => [['text' => $prompt3]]]],
         ]);
@@ -118,12 +118,17 @@ class TestController extends Controller
         $descriptionHtml = $parsedown->text($description);
         $recommendationHtml = $parsedown->text($recommendation);
 
-        return view('mbti_test.result', [
+        return redirect()->route('mbti_test.result')->with([
             'mbtiType' => $mbtiType,
             'description' => $descriptionHtml,
             'recommendation' => $recommendationHtml,
         ]);
 
         // TODO: save the result to the database
+    }
+
+    public function result()
+    {
+        return view('mbti_test.result');
     }
 }

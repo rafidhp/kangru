@@ -31,4 +31,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(TestController::class)->middleware('auth')->group(function () {
     Route::get('/mbti-test', 'index')->name('mbti_test');
     Route::post('/mbti-test/store', 'store')->name('mbti_test.store');
+    Route::get('/mbti-test/result', 'result')->name('mbti_test.result');
 });
