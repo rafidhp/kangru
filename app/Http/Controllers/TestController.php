@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Parsedown;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Parsedown;
 
 class TestController extends Controller
 {
@@ -46,7 +46,7 @@ class TestController extends Controller
             8 => 'Saya lebih suka tetap fleksibel dan menyesuaikan diri dengan situasi baru',
         ];
 
-        $answersText = "";
+        $answersText = '';
         foreach ($questions as $key => $question) {
             $answer = $request->input("answer_$key");
             $answersText .= "{$key}. {$question} → {$answer}\n";
@@ -56,27 +56,27 @@ class TestController extends Controller
         $api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey";
 
         // prompt and response 1
-        $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya INFJ-T tanpa penjelasan.";
+        $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya (contohnya seperti INFJ-T, ESTP-A, dst.) tanpa penjelasan.";
         $response1 = Http::post($api_url, [
-            'contents' => [['parts' => [['text' => $prompt1]]]]
+            'contents' => [['parts' => [['text' => $prompt1]]]],
         ]);
         $mbtiType = trim($response1->json('candidates.0.content.parts.0.text'));
 
         // prompt and response 2
         $prompt2 = "Jelaskan secara singkat apa itu tipe MBTI {$mbtiType}, berikan juga julukannya (misalnya ISFP-T(Adventurer), INFJ-A(Advocate), dst). Langsung penjelasannya saja tanpa kata pengantar. Jangan bandingkan dengan tipe MBTI lainnya dan berikan penjelasan tentang kelebihannya saja dalam bentuk naratif paragraf";
         $response2 = Http::post($api_url, [
-            'contents' => [['parts' => [['text' => $prompt2]]]]
+            'contents' => [['parts' => [['text' => $prompt2]]]],
         ]);
         $description = trim($response2->json('candidates.0.content.parts.0.text'));
 
         // prompt and response 3
         $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
         $response3 = Http::post($api_url, [
-            'contents' => [['parts' => [['text' => $prompt3]]]]
+            'contents' => [['parts' => [['text' => $prompt3]]]],
         ]);
         $recommendation = trim($response3->json('candidates.0.content.parts.0.text'));
 
-        $parsedown = new Parsedown();
+        $parsedown = new Parsedown;
         $descriptionHtml = $parsedown->text($description);
         $recommendationHtml = $parsedown->text($recommendation);
 
