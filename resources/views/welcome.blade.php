@@ -27,6 +27,7 @@
     </style>
 </head>
 
+<<<<<<< HEAD
 <!-- Body with gradient background -->
 <body class="min-h-screen bg-gradient-to-r from-indigo-900 via-blue-900 to-blue-800 flex items-center justify-center">
     <div class="w-full max-w-7xl xl:max-w-6xl 2xl:max-w-7xl bg-white/10 rounded-[20px] shadow-2xl flex flex-col-reverse xl:flex-row overflow-hidden mx-4">
@@ -37,6 +38,20 @@
         onerror="this.style.display='none'"
         />
     </div>
+=======
+<body>
+    @if (Auth::check())
+        <h1 class="text-[#999000]">hello world {{ Auth::user()->name }}!</h1>
+        <a href="{{ route('mbti_test') }}">MBTI Test</a>
+        <br><br>
+        <a href="{{ route('auth.logout') }}">Logout</a>
+    @else
+        <h1 class="text-[#999000]">hello world!</h1>
+        <br>
+        <a href="{{ route('auth.login') }}">Login</a>
+    @endif
+</body>
+>>>>>>> c324daa8c19ae5364379d9d3341774625923e4fa
 
         <!-- Alpine.js state for toggling login/register -->
         <div x-data="{ showLogin: true }" class="flex items-center justify-center min-h-screen absolute inset-0 z-20">
