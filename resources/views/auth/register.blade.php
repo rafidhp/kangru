@@ -3,6 +3,7 @@
     <input type="text" name="username" placeholder="Username" required>
     <input type="text" name="name" placeholder="Name" required>
     <input type="email" name="email" placeholder="example@gmail.com" required>
+    <input type="number" name="age" placeholder="Umur" required>
     <input type="password" name="password" placeholder="Password" required>
     <input type="password" name="password_confirmation" placeholder="Password Confirmation" required>
     <br><br>

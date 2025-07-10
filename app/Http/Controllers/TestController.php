@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 use Parsedown;
 
 class TestController extends Controller
@@ -24,6 +25,13 @@ class TestController extends Controller
             'answer_6' => 'required',
             'answer_7' => 'required',
             'answer_8' => 'required',
+            'answer_9' => 'required',
+            'answer_10' => 'required',
+            'answer_11' => 'required',
+            'answer_12' => 'required',
+            'answer_13' => 'required',
+            'answer_14' => 'required',
+            'answer_15' => 'required',
         ], [
             'answer_1.required' => 'This answer is required!',
             'answer_2.required' => 'This answer is required!',
@@ -33,7 +41,22 @@ class TestController extends Controller
             'answer_6.required' => 'This answer is required!',
             'answer_7.required' => 'This answer is required!',
             'answer_8.required' => 'This answer is required!',
+            'answer_9.required' => 'This answer is required!',
+            'answer_10.required' => 'This answer is required!',
+            'answer_11.required' => 'This answer is required!',
+            'answer_12.required' => 'This answer is required!',
+            'answer_13.required' => 'This answer is required!',
+            'answer_14.required' => 'This answer is required!',
+            'answer_15.required' => 'This answer is required!',
         ]);
+
+        if (Auth::user()->age >= 6 && Auth::user()->age <= 16) {
+            $question_13 = 'Apa mata pelajaran favoritmu di sekolah? mengapa?';
+        } elseif (Auth::user()->age > 16 && Auth::user()->age <= 18) {
+            $question_13 = 'Setelah lulus SMA/SMK/MA (sederajat), apakah kamu lebih tertarik untuk langsung bekerja, kuliah, atau memulai bisnis?';
+        } else {
+            $question_13 = 'Kamu lebih tertarik untuk bekerja, melanjutkan studi, atau memulai bisnis sendiri?';
+        }
 
         $questions = [
             1 => 'Saya merasa nyaman berbicara di depan banyak orang',
@@ -44,11 +67,26 @@ class TestController extends Controller
             6 => 'Saya mempertimbangkan perasaan orang lain saat membuat keputusan',
             7 => 'Saya suka membuat rencana dan mengikuti jadwal yang ketat',
             8 => 'Saya lebih suka tetap fleksibel dan menyesuaikan diri dengan situasi baru',
+            9 => 'Bidang apa yang paling menarik untuk kamu pelajari atau kerjakan?',
+            10 => 'Apakah kamu lebih suka bekerja di perusahaann besar, startup, atau membangun bisnis sendiri?',
+            11 => 'Seberapa penting bagi kamu untuk bekerja di bidang yang membantu lingkungan?',
+            12 => 'Apakah kamu ingin pekerjaan yang memungkinkan kamu membantu orang lain secara langsung?',
+            13 => $question_13,
+            14 => 'Apakah kamu tertarik bekerja di sektor yang mendukung energi terbarukan atau pelestarian lingkungan?',
+            15 => 'Seberapa besar kamu ingin bisnis atau pekerjaanmu di masa depan berdampak positif pada masyarakat?',
         ];
 
         $answersText = '';
         foreach ($questions as $key => $question) {
             $answer = $request->input("answer_$key");
+
+            if ($key == 9 && $answer == 'lainnya') {
+                $other = trim($request->input('answer_9_other'));
+                if ($other) {
+                    $answer = $other;
+                }
+            }
+
             $answersText .= "{$key}. {$question} → {$answer}\n";
         }
 
@@ -70,7 +108,7 @@ class TestController extends Controller
         $description = trim($response2->json('candidates.0.content.parts.0.text'));
 
         // prompt and response 3
-        $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
+        $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, \n {$answersText} dan data yang saya miliki terutama pada pertanyaan nomor 9-15, berikan saran dan rekomendasi lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? (jika terdapat unsur olahraga, tidak menutup kemungkinan untuk menjadi atlet). Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
         $response3 = Http::post($api_url, [
             'contents' => [['parts' => [['text' => $prompt3]]]],
         ]);

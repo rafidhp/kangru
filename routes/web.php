@@ -20,6 +20,7 @@ Route::get('/', function () {
 })->name('dashboard');
 
 Route::controller(AuthController::class)->group(function () {
+    Route::get('/auth', 'auth')->name('auth.auth');
     Route::get('/login', 'login')->name('auth.login');
     Route::post('/login/post', 'postlogin')->name('auth.postlogin');
     Route::get('/register', 'register')->name('auth.register');

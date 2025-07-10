@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
                 'password' => bcrypt('admin'),
+                'age' => 18,
                 'role' => 'admin',
             ],
             [
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
                 'name' => 'mentor',
                 'email' => 'mentor@gmail.com',
                 'password' => bcrypt('mentor'),
+                'age' => 19,
                 'role' => 'mentor',
             ],
             [
@@ -32,6 +34,7 @@ class UserSeeder extends Seeder
                 'name' => 'user',
                 'email' => 'user@gmail.com',
                 'password' => bcrypt('user'),
+                'age' => 17,
                 'role' => 'user',
             ],
             [
@@ -39,6 +42,7 @@ class UserSeeder extends Seeder
                 'name' => 'Zaky-Kun',
                 'email' => 'jaki@wibu.com',
                 'password' => bcrypt('mentor'),
+                'age' => 16,
                 'role' => 'mentor',
             ],
         ];
