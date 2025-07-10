@@ -48,7 +48,7 @@
                     Mulailah Perjalanan Karir Anda bersama <span class="text-indigo-600">Kangru</span>
                 </h1>
                 <p class="max-w-md mb-6 text-gray-600 text-left">
-                    Dapatkan bimbingan karir berbasis AI yang dipersonalisasi, analisis kepribadian DISC, dan mentoring profesional untuk sukses di jalur Bekerja, Melanjutkan Studi, atau Wirausaha.
+                    Dapatkan bimbingan karir berbasis AI yang dipersonalisasi, analisis kepribadian MBTI, dan mentoring profesional untuk sukses di jalur Bekerja, Melanjutkan Studi, atau Wirausaha.
                 </p>
                 <button class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">
                     Mulai Sekarang!
@@ -137,7 +137,7 @@
     <section class="relative py-20 bg-gradient-to-b from-indigo-50 to-white">
         <div class="max-w-5xl mx-auto text-center px-4">
             <h2 class="text-3xl md:text-4xl font-bold mb-4 text-indigo-700">Temukan Jalur Karir Terbaik untuk Masa Depanmu</h2>
-            <p class="mb-8 text-gray-600 text-lg">Pilih jalur yang paling sesuai dengan impianmu. Kangru siap mendampingi setiap langkahmu dengan bimbingan dan mentor profesional.</p>
+            <p class="mb-8 text-gray-600 text-lg">Kangru memberikan panduan terarah untuk membantu kamu memilih dan sukses di jalur karir yang paling cocok. Apakah kamu ingin langsung bekerja, melanjutkan studi, atau membangun bisnis, kami hadir untuk mendukung setiap langkahmu.</p>
             <div class="flex flex-col md:flex-row justify-center gap-6">
                 <div class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
                     <div class="bg-indigo-100 rounded-full p-4 mb-4">
@@ -196,40 +196,39 @@
     </section>
 
     <!-- Testimoni -->
-    <section class="bg-indigo-50 py-16">
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <!-- Testimoni 1 -->
-            <div class="flex flex-col items-center text-center">
-                <img src="{{ asset('assets/rafi.png') }}" alt="Malika Lathifa" class="mb-4 rounded-full h-24 w-24 object-cover border-4 border-indigo-100 shadow">
-                <span class="text-xl md:text-2xl font-semibold text-indigo-700 mb-2">Rafi Islami</span>
-                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 w-full">
-                    <div class="flex items-center justify-center mb-2">
-                        <span class="font-semibold text-gray-800 mr-2">Penilaian:</span>
-                        <span class="flex text-yellow-400 text-lg">
+    <section class="bg-indigo-50 py-20">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-center text-4xl font-extrabold mb-12 text-indigo-800 tracking-wide drop-shadow-md">Apa kata lulusan</h2>
+            <div class="grid md:grid-cols-2 gap-16 items-start">
+                <!-- Testimoni 1 -->
+                <div class="flex flex-col items-center text-center bg-white rounded-3xl shadow-2xl p-8 hover:shadow-indigo-400 transition-shadow duration-300">
+                    <img src="{{ asset('assets/rafi.png') }}" alt="Malika Lathifa" class="mb-6 rounded-full h-28 w-28 object-cover border-4 border-indigo-200 shadow-lg">
+                    <span class="text-2xl font-bold text-indigo-700 mb-3">Rafi Islami</span>
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="font-semibold text-gray-900 mr-3">Penilaian:</span>
+                        <span class="flex text-yellow-400 text-xl">
                             @for($i=0;$i<5;$i++)
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10,1 12.59,7.36 19.51,7.36 13.97,11.64 16.56,18 10,13.72 3.44,18 6.03,11.64 0.49,7.36 7.41,7.36"/></svg>
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><polygon points="10,1 12.59,7.36 19.51,7.36 13.97,11.64 16.56,18 10,13.72 3.44,18 6.03,11.64 0.49,7.36 7.41,7.36"/></svg>
                             @endfor
                         </span>
                     </div>
-                    <p class="text-gray-700 leading-relaxed text-base">
+                    <p class="text-gray-800 leading-relaxed text-lg font-medium">
                         "Kangru benar-benar membantu saya memahami potensi diri dan menentukan pilihan karir yang tepat. Dengan fitur-fiturnya yang interaktif dan informatif, saya bisa mengeksplorasi berbagai peluang kerja yang sesuai dengan minat dan kemampuan saya. Aplikasi ini seperti teman yang selalu siap memberikan panduan dan motivasi untuk mencapai tujuan karir saya. Sangat direkomendasikan untuk siapa saja yang masih bingung menentukan arah masa depan mereka!"
                     </p>
                 </div>
-            </div>
-            <!-- Testimoni 2 -->
-            <div class="flex flex-col items-center text-center">
-                <img src="{{ asset('assets/ipul.png') }}" alt="Charlotte Isabella" class="mb-4 rounded-full h-24 w-24 object-cover border-4 border-indigo-100 shadow">
-                <span class="text-xl md:text-2xl font-semibold text-indigo-700 mb-2">Saifulloh Fattah</span>
-                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 w-full">
-                    <div class="flex items-center justify-center mb-2">
-                        <span class="font-semibold text-gray-800 mr-2">Penilaian:</span>
-                        <span class="flex text-yellow-400 text-lg">
+                <!-- Testimoni 2 -->
+                <div class="flex flex-col items-center text-center bg-white rounded-3xl shadow-2xl p-8 hover:shadow-indigo-400 transition-shadow duration-300">
+                    <img src="{{ asset('assets/ipul.png') }}" alt="Charlotte Isabella" class="mb-6 rounded-full h-28 w-28 object-cover border-4 border-indigo-200 shadow-lg">
+                    <span class="text-2xl font-bold text-indigo-700 mb-3">Saifulloh Fattah</span>
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="font-semibold text-gray-900 mr-3">Penilaian:</span>
+                        <span class="flex text-yellow-400 text-xl">
                             @for($i=0;$i<5;$i++)
-                            <svg class="w-5 h-5 fill-current" viewBox="0 0 20 20"><polygon points="10,1 12.59,7.36 19.51,7.36 13.97,11.64 16.56,18 10,13.72 3.44,18 6.03,11.64 0.49,7.36 7.41,7.36"/></svg>
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 20 20"><polygon points="10,1 12.59,7.36 19.51,7.36 13.97,11.64 16.56,18 10,13.72 3.44,18 6.03,11.64 0.49,7.36 7.41,7.36"/></svg>
                             @endfor
                         </span>
                     </div>
-                    <p class="text-gray-700 leading-relaxed text-base">
+                    <p class="text-gray-800 leading-relaxed text-lg font-medium">
                         "Saya sangat terbantu dengan Kangru! Aplikasi ini memberikan wawasan yang jelas tentang berbagai jalur karir yang cocok dengan kepribadian dan keterampilan saya. Panduannya mudah dipahami, dan saya merasa lebih percaya diri dalam mengambil langkah menuju masa depan. Rasanya seperti punya mentor pribadi dengan genggaman. Sungguh solusi yang luar biasa bagi mereka yang ingin membangun karir dengan arah yang jelas!"
                     </p>
                 </div>
@@ -330,10 +329,5 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-100 text-center py-8 text-gray-600">
-        <p>&copy; 2025 Kangru Software Inc. All rights reserved.</p>
-    </footer>
 </body>
 </html>
