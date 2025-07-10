@@ -13,13 +13,13 @@
         <h1 class="text-2xl font-bold mb-4 text-center">Hasil MBTI Kamu</h1>
 
         <h2 class="text-xl font-semibold">Tipe MBTI:</h2>
-        <p class="text-3xl font-bold text-center">{{ session('mbtiType') }}</p>
+        <p class="text-3xl font-bold text-center">{{ $mbtiType }}</p>
 
         <h2 class="text-xl font-semibold mt-6">Penjelasan:</h2>
-        {!! session('description') !!}
+        {!! $description !!}
 
         <h2 class="text-xl font-semibold mt-6">Rekomendasi:</h2>
-        {!! session('recommendation') !!}
+        {!! $recommendation !!}
     </div>
 </body>
 

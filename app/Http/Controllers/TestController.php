@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Parsedown;
 
 class TestController extends Controller
@@ -118,17 +119,28 @@ class TestController extends Controller
         $descriptionHtml = $parsedown->text($description);
         $recommendationHtml = $parsedown->text($recommendation);
 
+        $user = User::where('id', Auth::user()->id)->get();
+
+        $user[0]->update([
+            'mbti_type' => $mbtiType,
+            'mbti_desc' => $descriptionHtml,
+            'recommendation_career' => $recommendationHtml,
+        ]);
+
         return redirect()->route('mbti_test.result')->with([
             'mbtiType' => $mbtiType,
             'description' => $descriptionHtml,
             'recommendation' => $recommendationHtml,
         ]);
-
-        // TODO: save the result to the database
     }
 
     public function result()
     {
-        return view('mbti_test.result');
+        $user = User::where('id', Auth::user()->id)->get();
+        $mbtiType = $user[0]->mbti_type;
+        $description = $user[0]->mbti_desc;
+        $recommendation = $user[0]->recommendation_career;
+
+        return view('mbti_test.result', compact('mbtiType', 'description', 'recommendation'));
     }
 }

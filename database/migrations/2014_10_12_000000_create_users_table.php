@@ -19,6 +19,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('age');
+            $table->string('mbti_type')->nullable();
+            $table->text('mbti_desc')->nullable();
+            $table->text('recommendation_career')->nullable();
             $table->string('role');
             $table->rememberToken();
             $table->timestamps();

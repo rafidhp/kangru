@@ -23,6 +23,9 @@ class User extends Authenticatable
         'email',
         'password',
         'age',
+        'mbti_type',
+        'mbti_desc',
+        'recommendation_career',
         'role',
     ];
 
