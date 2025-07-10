@@ -27,7 +27,6 @@
     </style>
 </head>
 
-<<<<<<< HEAD
 <!-- Body with gradient background -->
 <body class="min-h-screen bg-gradient-to-r from-indigo-900 via-blue-900 to-blue-800 flex items-center justify-center">
     <div class="w-full max-w-7xl xl:max-w-6xl 2xl:max-w-7xl bg-white/10 rounded-[20px] shadow-2xl flex flex-col-reverse xl:flex-row overflow-hidden mx-4">
@@ -38,20 +37,6 @@
         onerror="this.style.display='none'"
         />
     </div>
-=======
-<body>
-    @if (Auth::check())
-        <h1 class="text-[#999000]">hello world {{ Auth::user()->name }}!</h1>
-        <a href="{{ route('mbti_test') }}">MBTI Test</a>
-        <br><br>
-        <a href="{{ route('auth.logout') }}">Logout</a>
-    @else
-        <h1 class="text-[#999000]">hello world!</h1>
-        <br>
-        <a href="{{ route('auth.login') }}">Login</a>
-    @endif
-</body>
->>>>>>> c324daa8c19ae5364379d9d3341774625923e4fa
 
         <!-- Alpine.js state for toggling login/register -->
         <div x-data="{ showLogin: true }" class="flex items-center justify-center min-h-screen absolute inset-0 z-20">
@@ -79,9 +64,12 @@
                     <p class="text-center text-sm md:text-base text-gray-600 mb-8">
                         Silakan masukkan detail Anda
                     </p>
-                    <form class="space-y-6" action="#" method="POST" novalidate>
+                    <form class="space-y-6" action="{{ route('auth.postlogin') }}" method="POST" novalidate>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                            @error('username')
+                            <div>{{ $message }}</div>
+                            <br>
+                            <label for="username" class="block text-sm font-medium text-gray-700">Email</label>
                             <input
                                 id="username"
                                 name="username"
@@ -91,10 +79,14 @@
                                 class="mt-1 block w-full border-b border-gray-300 focus:border-indigo-600 focus:ring-0 focus:outline-none placeholder-gray-400 text-gray-900 bg-transparent pb-1"
                                 placeholder="Isi username anda"
                             />
+                            @enderror
                         </div>
                         <div>
                             <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <div class="relative">
+                                @error('password')
+                                <div>{{ $message }}</div>
+                                <br>
                                 <input
                                     id="password"
                                     name="password"
@@ -104,6 +96,7 @@
                                     class="mt-1 block w-full border-b border-gray-300 focus:border-indigo-600 focus:ring-0 focus:outline-none placeholder-gray-400 text-gray-900 bg-transparent pb-1 pr-10"
                                     placeholder="••••••••"
                                 />
+                                @enderror
                                 <button type="button" aria-label="Toggle password visibility" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-indigo-600" onclick="togglePasswordVisibility()">
                                     <svg id="eyeIcon" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"  viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -122,6 +115,10 @@
                         <button type="submit" class="w-full py-3 bg-black text-white rounded-full font-semibold text-lg hover:bg-indigo-900 transition-colors duration-200">
                             Masuk
                         </button>
+                            @if (session('success'))
+                            <div>{{ session('success') }}</div>
+                            <br>
+                            @endif
                     </form>
                     <div class="mt-6 text-center">
                         <button
@@ -167,7 +164,19 @@
                     <p class="text-center text-sm md:text-base text-gray-600 mb-8">
                         Silakan isi data untuk mendaftar
                     </p>
-                    <form class="space-y-6" action="#" method="POST" novalidate>
+                    <form class="space-y-6" action="{{route('auth.postregister')}}" method="post">
+                        @csrf
+                        <div>
+                            <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                            <input
+                                id="username"
+                                name="username"
+                                type="text"
+                                required
+                                class="mt-1 block w-full border-b border-gray-300 focus:border-indigo-600 focus:ring-0 focus:outline-none placeholder-gray-400 text-gray-900 bg-transparent pb-1"
+                                placeholder="Nama Lengkap"
+                            />
+                        </div>
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                             <input
@@ -180,21 +189,21 @@
                             />
                         </div>
                         <div>
-                            <label for="register_email" class="block text-sm font-medium text-gray-700">Email</label>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                             <input
-                                id="register_email"
+                                id="email"
                                 name="email"
                                 type="email"
                                 autocomplete="email"
                                 required
                                 class="mt-1 block w-full border-b border-gray-300 focus:border-indigo-600 focus:ring-0 focus:outline-none placeholder-gray-400 text-gray-900 bg-transparent pb-1"
-                                placeholder="contoh@email.com"
+                                placeholder="example@email.com"
                             />
                         </div>
                         <div>
-                            <label for="register_password" class="block text-sm font-medium text-gray-700">Password</label>
+                            <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                             <input
-                                id="register_password"
+                                id="password"
                                 name="password"
                                 type="password"
                                 autocomplete="new-password"
@@ -206,7 +215,7 @@
                         <div>
                             <label for="register_password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                             <input
-                                id="register_password_confirmation"
+                                id="password_confirmation"
                                 name="password_confirmation"
                                 type="password"
                                 autocomplete="new-password"
