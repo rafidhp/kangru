@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Models\User;
-
 class AuthController extends Controller
 {
+    public function auth()
+    {
+        return view('auth.auth');
+    }
+
     public function login()
     {
         return view('auth.login');

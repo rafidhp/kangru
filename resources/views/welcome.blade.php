@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Kangru - Mulailah Perjalanan Karir Anda</title>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kangru</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+>>>>>>> d289f25eee1985e0c07b2e6b2867f9657ee55f1b
 </head>
 <body class="text-gray-800">
 
+<<<<<<< HEAD
     <!-- Navbar -->
     <header class="flex justify-between items-center px-6 md:px-12 py-4 border border-black rounded-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
         <div class="flex items-center space-x-2">
@@ -330,4 +340,19 @@
         </div>
     </section>
 </body>
+=======
+<body>
+    @if (Auth::check())
+        <h1 class="text-[#999000]">hello world {{ Auth::user()->name }}!</h1>
+        <a href="{{ route('mbti_test') }}">MBTI Test</a>
+        <br><br>
+        <a href="{{ route('auth.logout') }}">Logout</a>
+    @else
+        <h1 class="text-[#999000]">hello world!</h1>
+        <br>
+        <a href="{{ route('auth.login') }}">Login</a>
+    @endif
+</body>
+
+>>>>>>> d289f25eee1985e0c07b2e6b2867f9657ee55f1b
 </html>

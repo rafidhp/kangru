@@ -20,6 +20,7 @@ Route::get('/', function () {
 })->name('dashboard');
 
 Route::controller(AuthController::class)->group(function () {
+    Route::get('/auth', 'auth')->name('auth.auth');
     Route::get('/login', 'login')->name('auth.login');
     Route::post('/login/post', 'postlogin')->name('auth.postlogin');
     Route::get('/register', 'register')->name('auth.register');
@@ -30,4 +31,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(TestController::class)->middleware('auth')->group(function () {
     Route::get('/mbti-test', 'index')->name('mbti_test');
     Route::post('/mbti-test/store', 'store')->name('mbti_test.store');
+    Route::get('/mbti-test/result', 'result')->name('mbti_test.result');
 });
