@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="{{ asset('assets/logo.png') }}" type="image/x-icon">
     <title>Register</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <style>
         .wavy-bg {
             background: repeating-radial-gradient(circle at 50% 50%, #fafafa 0, #fafafa 2px, #f0f0f0 2px, #f0f0f0 6px);
@@ -21,6 +23,14 @@
             background: repeating-linear-gradient(45deg, #fafafa 0, #fafafa 10px, #f5f5f5 10px, #f5f5f5 20px);
             opacity: 0.3;
             pointer-events: none;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0;
         }
     </style>
 </head>
@@ -41,15 +51,6 @@
             </p>
             <form class="space-y-6" action="{{ route('auth.postregister') }}" method="post">
                 @csrf
-                @if ($errors->any())
-                    <div class="mb-4 text-red-600 text-sm bg-red-50 border border-red-200 rounded p-3">
-                        <ul class="list-disc pl-5">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div>
                     <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                     <input id="username" name="username" type="text" required value="{{ old('username') }}"
@@ -89,17 +90,14 @@
                     @enderror
                 </div>
                 <div class="relative">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input id="password" name="password" type="password" autocomplete="new-password" required
                         class="mt-1 block w-full border-b border-gray-300 focus:border-indigo-600 focus:ring-0 focus:outline-none placeholder-gray-400 text-gray-900 bg-transparent pb-1 pr-10"
                         placeholder="••••••••" />
                     <button type="button" tabindex="-1"
                         class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-indigo-600"
                         onclick="togglePasswordVisibility('password', 'eyeIconReg')">
-                        <svg id="eyeIconReg" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
+                        <i class="fas fa-eye text-[#777777] text-lg cursor-pointer" id="eyeIconReg"></i>
                     </button>
                     @error('password')
                         <div class="text-red-500 text-xs mt-1">{{ $message }}</div>
@@ -115,11 +113,7 @@
                     <button type="button" tabindex="-1"
                         class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-indigo-600"
                         onclick="togglePasswordVisibility('password_confirmation', 'eyeIconRegConf')">
-                        <svg id="eyeIconRegConf" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                            <circle cx="12" cy="12" r="3" />
-                        </svg>
+                        <i class="fas fa-eye text-[#777777] text-lg cursor-pointer" id="eyeIconRegConf"></i>
                     </button>
                 </div>
                 <button type="submit"
@@ -144,16 +138,12 @@
         const eyeIcon = document.getElementById(iconId);
         if (pwdInput.type === 'password') {
             pwdInput.type = 'text';
-            eyeIcon.innerHTML = `
-            <path d="M17.94 17.94A10.12 10.12 0 0 1 12 20c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.06-6.94"/>
-            <path d="M1 1l22 22"/>
-        `;
+            eyeIcon.classList.remove('fa-eye');
+            eyeIcon.classList.add('fa-eye-slash');
         } else {
             pwdInput.type = 'password';
-            eyeIcon.innerHTML = `
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-            <circle cx="12" cy="12" r="3"/>
-        `;
+            eyeIcon.classList.remove('fa-eye-slash');
+            eyeIcon.classList.add('fa-eye');
         }
     }
 </script>
