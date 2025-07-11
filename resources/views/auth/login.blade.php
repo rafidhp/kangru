@@ -29,7 +29,7 @@
 
 <body class="min-h-screen bg-gradient-to-r from-indigo-900 via-blue-900 to-blue-800 flex items-center justify-center">
     <div
-        class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-2xl shadow-2xl p-6 md:p-10 wavy-bg relative">
+        class="w-full max-w-xs sm:max-w-sm md:max-w-md my-12 lg:max-w-lg bg-white rounded-2xl shadow-2xl p-6 md:p-10 wavy-bg relative">
         <img src="{{ asset('assets/background.jpg') }}"
             alt="Smartphone laying flat on a blue gradient background showing a purple mascot cartoon character with text content and a button displayed on screen in a clean modern style"
             class="fixed inset-0 bg-no-repeat bg-center bg-contain -z-10" onerror="this.style.display='none'" />
