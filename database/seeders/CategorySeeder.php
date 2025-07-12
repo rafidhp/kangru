@@ -28,6 +28,9 @@ class CategorySeeder extends Seeder
             [
                 'category_name' => 'Kuliah dan Wirausaha',
             ],
+            [
+                'category_name' => 'Kerja dan Wirausaha',
+            ],
         ];
 
         foreach ($categories as $category) {

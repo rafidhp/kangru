@@ -25,10 +25,10 @@
                     <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
                 @endif
             </a>
-            <a href="{{ url('/artikel') }}"
-                class="flex flex-col items-center {{ request()->is('artikel') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+            <a href="{{ url('/article') }}"
+                class="flex flex-col items-center {{ request()->is('article') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Artikel
-                @if (request()->is('artikel'))
+                @if (request()->is('article'))
                     <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
                 @endif
             </a>
