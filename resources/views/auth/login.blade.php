@@ -41,7 +41,7 @@
             <form class="space-y-6" action="{{ route('auth.postlogin') }}" method="POST" novalidate>
                 @csrf
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700">Email</label>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                     <input
                         id="username"
                         name="username"

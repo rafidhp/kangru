@@ -2,56 +2,75 @@
 <html lang="id">
 
 <head>
-<<<<<<< HEAD
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Kangru - Mulailah Perjalanan Karir Anda</title>
-=======
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kangru</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
->>>>>>> d289f25eee1985e0c07b2e6b2867f9657ee55f1b
 </head>
+
 <body class="text-gray-800">
 
-<<<<<<< HEAD
     <!-- Navbar -->
-    <header class="flex justify-between items-center px-6 md:px-12 py-4 border border-black rounded-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
+    <header x-data="{ open: false }" class="flex justify-between items-center px-6 md:px-12 py-4 border border-black rounded-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
         <div class="flex items-center space-x-2">
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-8">
             <span class="font-semibold">Kangru</span>
         </div>
-        <nav class="hidden md:flex space-x-6">
-            <a href="{{ url('/') }}" class="flex flex-col items-center {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+        <nav :class="{'block': open, 'hidden': !open}" class="absolute top-full left-0 w-full bg-white/90 backdrop-blur-md md:static md:block md:w-auto md:bg-transparent md:backdrop-blur-0 md:flex md:space-x-6">
+            <a href="{{ url('/') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
             Beranda
             @if(request()->is('/'))
                 <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
             @endif
             </a>
-            <a href="{{ url('/artikel') }}" class="flex flex-col items-center {{ request()->is('artikel') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+            <a href="{{ url('/artikel') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('artikel') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
             Artikel
             @if(request()->is('artikel'))
                 <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
             @endif
             </a>
-            <a href="{{ url('/tes-kepribadian') }}" class="flex flex-col items-center {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+            <a href="{{ url('/mbti-test') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
             Tes Kepribadian
             @if(request()->is('tes-kepribadian'))
                 <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
             @endif
             </a>
+            @if(Auth::check())
+                <div x-data="{ openProfile: false }" class="relative block px-4 py-2 md:flex md:flex-col md:items-center">
+                    <button @click="openProfile = !openProfile" class="text-indigo-600 font-semibold hover:text-indigo-500 transition duration-200 focus:outline-none">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <div x-show="openProfile" @click.away="openProfile = false" class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                    </div>
+                </div>
+            @else
+                <a href="{{ url('/login') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg mb-0 transition-transform duration-200 hover:scale-105 text-center">
+                    Masuk
+                </a>
+            @endif
         </nav>
-        <button class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">Masuk</button>
+        <button @click="open = !open" class="md:hidden text-indigo-600 focus:outline-none" aria-label="Toggle menu">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
     </header>
     <div class="h-20 md:h-20"></div>
 
     <!-- Hero -->
     <section class="relative py-12 md:py-20 bg-gradient-to-b from-white to-indigo-50">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-8">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-8 px-4 md:px-0">
             <!-- Kiri: Keterangan & Tombol -->
             <div class="flex-1 flex flex-col items-start md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2">
                 <h1 class="text-3xl md:text-4xl font-bold mb-4 text-left md:text-left">
@@ -66,21 +85,13 @@
             </div>
             <!-- Tengah: Asset HP -->
             <div class="flex-1 flex flex-col items-center order-1 md:order-2 w-full md:w-1/2">
-                <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-80 md:w-[32rem] shadow-lg mb-6">
+                <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-full max-w-xs md:max-w-md mb-6">
                 <!-- Logo Integrasi -->
                 <div class="flex flex-wrap justify-center items-center gap-6 mt-2">
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 object-contain" alt="LinkedIn">
-                    </div>
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 object-contain" alt="Discord">
-                    </div>
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 object-contain" alt="Zoom">
-                    </div>
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 object-contain" alt="Google Meet">
-                    </div>
+                    <img src="{{ asset('assets/linkedin.png') }}" class="h-20 w-20 object-contain" alt="LinkedIn">
+                    <img src="{{ asset('assets/discord.png') }}" class="h-20 w-20 object-contain" alt="Discord">
+                    <img src="{{ asset('assets/zoom.png') }}" class="h-20 w-20 object-contain" alt="Zoom">
+                    <img src="{{ asset('assets/meet.png') }}" class="h-20 w-20 object-contain" alt="Google Meet">
                 </div>
             </div>
         </div>
@@ -340,7 +351,7 @@
         </div>
     </section>
 </body>
-=======
+
 <body>
     @if (Auth::check())
         <h1 class="text-[#999000]">hello world {{ Auth::user()->name }}!</h1>
@@ -354,5 +365,4 @@
     @endif
 </body>
 
->>>>>>> d289f25eee1985e0c07b2e6b2867f9657ee55f1b
 </html>
