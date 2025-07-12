@@ -55,16 +55,23 @@ class AuthController extends Controller
     public function postregister(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|unique:users,username|max:100',
-            'name' => 'required|string|max:100',
+            'username' => 'required|string|unique:users,username|max:100|min:3',
+            'name' => 'required|string|max:100|min:3',
+            'age' => 'required|numeric|max_digits:3|min:1',
             'email' => 'required|email|unique:users,email|max:100',
             'password' => 'required|confirmed|min:6',
         ], [
             'username.required' => 'Username is required',
             'username.unique' => 'Username already exists',
             'username.max' => 'Username must not exceed 100 characters',
+            'username.min' => 'Username must be at least 3 characters',
             'name.required' => 'Name is required',
             'name.max' => 'Name must not exceed 100 characters',
+            'name.min' => 'Name must be at least 3 characters',
+            'age.required' => 'Age is required',
+            'age.numeric' => 'Age must be a number',
+            'age.max_digits' => 'Maximum age is 3 digits',
+            'age.min' => 'Minimum age is 1',
             'email.required' => 'Email is required',
             'email.email' => 'Invalid email format',
             'email.unique' => 'Email already exists',
@@ -79,6 +86,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'age' => $request->age,
             'role' => 'user',
         ]);
 

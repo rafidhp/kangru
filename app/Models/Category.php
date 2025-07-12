@@ -19,4 +19,9 @@ class Category extends Model
     {
         return $this->belongTo(Mentor::class);
     }
+
+    public function article()
+    {
+        return $this->belongTo(Article::class);
+    }
 }

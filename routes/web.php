@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +33,9 @@ Route::controller(TestController::class)->middleware('auth')->group(function () 
     Route::get('/mbti-test', 'index')->name('mbti_test');
     Route::post('/mbti-test/store', 'store')->name('mbti_test.store');
     Route::get('/mbti-test/result', 'result')->name('mbti_test.result');
+});
+
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('/article', 'index')->name('article.index');
+    Route::get('/article/create', 'create')->name('article.create');
 });

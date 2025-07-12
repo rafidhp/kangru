@@ -21,6 +21,9 @@
         <h2 class="text-xl font-semibold mt-6">Rekomendasi:</h2>
         {!! $recommendation !!}
     </div>
+
+    <br><br>
+    <a href="{{ route('dashboard') }}">Kembali</a>
 </body>
 
 </html>
