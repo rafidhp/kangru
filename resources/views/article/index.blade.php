@@ -18,7 +18,8 @@
             <td>{{ $loop->iteration }}</td>
             @if ($article->image != null)
                 <td>
-                    <img src="{{ asset('storage/article/' . $article->image) }}" alt="article_img" style="width: 150px">
+                    <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
+                        alt="article_img" style="width: 150px">
                 </td>
             @else
                 <td>
@@ -34,8 +35,8 @@
                 <a href="{{ route('article.show', ['article_id' => $article->hashid]) }}">View
                     Detail</a>
                 @can('isAdmin')
-                    <a href="">Edit</a>
-                    <a href="">Delete</a>
+                    <a href="{{ route('article.edit', ['article_id' => $article->hashid]) }}">Edit</a>
+                    <a href="{{ route('article.destroy', ['article_id' => $article->hashid]) }}">Delete</a>
                 @endcan
             </td>
         </tr>

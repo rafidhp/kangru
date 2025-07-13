@@ -1,7 +1,7 @@
 <h2>Create Article</h2>
 <form action="{{ route('article.store') }}" method="post" enctype="multipart/form-data">
     @csrf
-    <input type="text" name="title" placeholder="article title" required>
+    <input type="text" name="title" placeholder="article title" value="{{ old('title') }}" required>
     <label for="image">Article image (optional)</label>
     <input type="file" name="image" id="image">
     @error('image')
@@ -10,7 +10,7 @@
     <label for="content">Article Content</label>
     <textarea name="content" id="content" cols="30" rows="5" required></textarea>
     <select name="category_id" required>
-        <option disabled selected>Pilih Category</option>
+        <option disabled selected>Select Category</option>
         @foreach ($categories as $category)
             <option value="{{ $category->id }}">{{ $category->category_name }}</option>
         @endforeach
