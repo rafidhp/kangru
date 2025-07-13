@@ -37,5 +37,7 @@ Route::controller(TestController::class)->middleware('auth')->group(function () 
 
 Route::controller(ArticleController::class)->group(function () {
     Route::get('/article', 'index')->name('article.index');
-    Route::get('/article/create', 'create')->name('article.create');
+    Route::get('/article/create', 'create')->middleware(['auth', 'can:isAdmin'])->name('article.create');
+    Route::post('/article/store', 'store')->middleware(['auth', 'can:isAdmin'])->name('article.store');
+    Route::get('/article/show/{article_id}', 'show')->name('article.show');
 });

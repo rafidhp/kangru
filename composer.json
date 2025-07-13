@@ -11,9 +11,12 @@
     "php": "^8.1",
     "erusev/parsedown": "^1.7",
     "guzzlehttp/guzzle": "^7.2",
+    "hashids/hashids": "^5.0",
+    "imagekit/imagekit": "^4.0",
     "laravel/framework": "^10.10",
     "laravel/sanctum": "^3.3",
-    "laravel/tinker": "^2.8"
+    "laravel/tinker": "^2.8",
+    "vinkla/hashids": "^11.0"
   },
   "require-dev": {
     "fakerphp/faker": "^1.9.1",

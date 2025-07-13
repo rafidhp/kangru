@@ -20,6 +20,11 @@ class Article extends Model
         'category_id',
     ];
 
+    public function getHashidAttribute()
+    {
+        return app(\App\Services\HashidsService::class)->encode($this->id);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
