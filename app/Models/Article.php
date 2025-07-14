@@ -10,6 +10,7 @@ class Article extends Model
     use HasFactory;
 
     protected $table = 'articles';
+
     protected $fillable = [
         'writers',
         'title',
@@ -18,6 +19,11 @@ class Article extends Model
         'upload_date',
         'category_id',
     ];
+
+    public function getHashidAttribute()
+    {
+        return app(\App\Services\HashidsService::class)->encode($this->id);
+    }
 
     public function category()
     {
