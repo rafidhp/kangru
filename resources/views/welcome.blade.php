@@ -2,21 +2,60 @@
 <html lang="id">
 
 <head>
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8f25d6239fa34d713147e02d6376454a83ba16b9
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Kangru - Mulailah Perjalanan Karir Anda</title>
+<<<<<<< HEAD
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kangru</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body class="text-gray-800">
+
+    <!-- Navbar -->
+    <header x-data="{ open: false }" class="flex justify-between items-center px-6 md:px-12 py-4 border border-black rounded-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
+=======
 </head>
 
 <body class="text-gray-800">
     <!-- Navbar -->
     <header
         class="flex justify-between items-center px-6 md:px-12 py-4 border border-black rounded-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
+>>>>>>> 8f25d6239fa34d713147e02d6376454a83ba16b9
         <div class="flex items-center space-x-2">
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-8">
             <span class="font-semibold">Kangru</span>
         </div>
+<<<<<<< HEAD
+        <nav :class="{'block': open, 'hidden': !open}" class="absolute top-full left-0 w-full bg-white/90 backdrop-blur-md md:static md:block md:w-auto md:bg-transparent md:backdrop-blur-0 md:flex md:space-x-6">
+            <a href="{{ url('/') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+            Beranda
+            @if(request()->is('/'))
+                <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
+            @endif
+            </a>
+            <a href="{{ url('/artikel') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('artikel') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+            Artikel
+            @if(request()->is('artikel'))
+                <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
+            @endif
+            </a>
+            <a href="{{ url('/mbti-test') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+            Tes Kepribadian
+            @if(request()->is('tes-kepribadian'))
+                <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
+            @endif
+=======
         <nav class="hidden md:flex space-x-6">
             <a href="{{ url('/') }}"
                 class="flex flex-col items-center {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
@@ -38,8 +77,23 @@
                 @if (request()->is('mbti-test'))
                     <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
                 @endif
+>>>>>>> 8f25d6239fa34d713147e02d6376454a83ba16b9
             </a>
+            @if(Auth::check())
+                <div x-data="{ openProfile: false }" class="relative block px-4 py-2 md:flex md:flex-col md:items-center">
+                    <button @click="openProfile = !openProfile" class="text-indigo-600 font-semibold hover:text-indigo-500 transition duration-200 focus:outline-none">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <div x-show="openProfile" @click.away="openProfile = false" class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                    </div>
+                </div>
+            @else
+                <a href="{{ url('/login') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg mb-0 transition-transform duration-200 hover:scale-105 text-center">
+                    Masuk
+                </a>
+            @endif
         </nav>
+<<<<<<< HEAD
             </a>
                 @if(Auth::check())
                     <div x-data="{ openProfile: false }" class="relative block px-4 py-2 md:flex md:flex-col md:items-center">
@@ -63,11 +117,27 @@
                     Masuk
                 </a>
             @endif
+=======
+<<<<<<< HEAD
+        <button @click="open = !open" class="md:hidden text-indigo-600 focus:outline-none" aria-label="Toggle menu">
+            <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+=======
+        <button
+            class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">Masuk</button>
+>>>>>>> 8f25d6239fa34d713147e02d6376454a83ba16b9
+>>>>>>> 09cb92cddcabb9306c7eef6e99bb3b24c0310d5b
     </header>
     <div class="h-20 md:h-20"></div>
 
     <!-- Hero -->
     <section class="relative py-12 md:py-20 bg-gradient-to-b from-white to-indigo-50">
+<<<<<<< HEAD
     <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-8">
         <!-- Kiri: Keterangan & Tombol -->
         <div class="flex-1 flex flex-col items-start md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2">
@@ -104,6 +174,33 @@
                 </div>
                 <div class="flex items-center justify-center h-20 w-20">
                     <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 object-contain" alt="Google Meet">
+=======
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-8 px-4 md:px-0">
+            <!-- Kiri: Keterangan & Tombol -->
+            <div
+                class="flex-1 flex flex-col items-start md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-left md:text-left">
+                    Mulailah Perjalanan Karir Anda bersama <span class="text-indigo-600">Kangru</span>
+                </h1>
+                <p class="max-w-md mb-6 text-gray-600 text-left">
+                    Dapatkan bimbingan karir berbasis AI yang dipersonalisasi, analisis kepribadian MBTI, dan mentoring
+                    profesional untuk sukses di jalur Bekerja, Melanjutkan Studi, atau Wirausaha.
+                </p>
+                <button
+                    class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">
+                    Mulai Sekarang!
+                </button>
+            </div>
+            <!-- Tengah: Asset HP -->
+            <div class="flex-1 flex flex-col items-center order-1 md:order-2 w-full md:w-1/2">
+                <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-full max-w-xs md:max-w-md mb-6">
+                <!-- Logo Integrasi -->
+                <div class="flex flex-wrap justify-center items-center gap-6 mt-2">
+                    <img src="{{ asset('assets/linkedin.png') }}" class="h-20 w-20 object-contain" alt="LinkedIn">
+                    <img src="{{ asset('assets/discord.png') }}" class="h-20 w-20 object-contain" alt="Discord">
+                    <img src="{{ asset('assets/zoom.png') }}" class="h-20 w-20 object-contain" alt="Zoom">
+                    <img src="{{ asset('assets/meet.png') }}" class="h-20 w-20 object-contain" alt="Google Meet">
+>>>>>>> 09cb92cddcabb9306c7eef6e99bb3b24c0310d5b
                 </div>
             </div>
         </div>
@@ -435,5 +532,21 @@
         </div>
     </section>
 </body>
+<<<<<<< HEAD
+
+<body>
+    @if (Auth::check())
+        <h1 class="text-[#999000]">hello world {{ Auth::user()->name }}!</h1>
+        <a href="{{ route('mbti_test') }}">MBTI Test</a>
+        <br><br>
+        <a href="{{ route('auth.logout') }}">Logout</a>
+    @else
+        <h1 class="text-[#999000]">hello world!</h1>
+        <br>
+        <a href="{{ route('auth.login') }}">Login</a>
+    @endif
+</body>
+=======
+>>>>>>> 8f25d6239fa34d713147e02d6376454a83ba16b9
 
 </html>
