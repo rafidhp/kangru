@@ -44,7 +44,7 @@
             <form class="space-y-6" action="{{ route('auth.postlogin') }}" method="POST" novalidate>
                 @csrf
                 <div>
-                    <label for="username" class="block text-sm font-medium text-gray-700">Email</label>
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                     <input id="username" name="username" type="text" autocomplete="username" required
                         class="mt-1 block w-full border-b border-gray-300 focus:border-indigo-600 focus:ring-0 focus:outline-none placeholder-gray-400 text-gray-900 bg-transparent pb-1"
                         placeholder="Isi username anda" value="{{ old('username') }}" />

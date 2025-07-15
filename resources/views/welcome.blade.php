@@ -32,63 +32,86 @@
                     <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
                 @endif
             </a>
-            <a href="{{ url('/tes-kepribadian') }}"
-                class="flex flex-col items-center {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+            <a href="{{ url('/mbti-test') }}"
+                class="flex flex-col items-center {{ request()->is('mbti-test') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Tes Kepribadian
-                @if (request()->is('tes-kepribadian'))
+                @if (request()->is('mbti-test'))
                     <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
                 @endif
             </a>
         </nav>
-        <button
-            class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">Masuk</button>
+            </a>
+                @if(Auth::check())
+                    <div x-data="{ openProfile: false }" class="relative block px-4 py-2 md:flex md:flex-col md:items-center">
+                        <button @click="openProfile = !openProfile" 
+                                class="text-indigo-600 font-semibold hover:text-indigo-500 transition duration-200 focus:outline-none">
+                            {{ Auth::user()->name }}
+                        </button>
+                        <div x-show="openProfile" @click.away="openProfile = false" 
+                            x-transition 
+                            class="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                            <form method="POST" action="{{ route('auth.logout') }}">
+                                @csrf
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @else
+                <a href="{{ url('/login') }}" class="block px-4 py-2 md:flex md:flex-col md:items-center bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg mb-0 transition-transform duration-200 hover:scale-105 text-center">
+                    Masuk
+                </a>
+            @endif
     </header>
     <div class="h-20 md:h-20"></div>
 
     <!-- Hero -->
     <section class="relative py-12 md:py-20 bg-gradient-to-b from-white to-indigo-50">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-8">
-            <!-- Kiri: Keterangan & Tombol -->
-            <div
-                class="flex-1 flex flex-col items-start md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-left md:text-left">
-                    Mulailah Perjalanan Karir Anda bersama <span class="text-indigo-600">Kangru</span>
-                </h1>
-                <p class="max-w-md mb-6 text-gray-600 text-left">
-                    Dapatkan bimbingan karir berbasis AI yang dipersonalisasi, analisis kepribadian MBTI, dan mentoring
-                    profesional untuk sukses di jalur Bekerja, Melanjutkan Studi, atau Wirausaha.
-                </p>
-                <button
-                    class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-8">
+        <!-- Kiri: Keterangan & Tombol -->
+        <div class="flex-1 flex flex-col items-start md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4 text-left md:text-left">
+                Mulailah Perjalanan Karir Anda bersama <span class="text-indigo-600">Kangru</span>
+            </h1>
+            <p class="max-w-md mb-6 text-gray-600 text-left">
+                Dapatkan bimbingan karir berbasis AI yang dipersonalisasi, analisis kepribadian MBTI, dan mentoring
+                profesional untuk sukses di jalur Bekerja, Melanjutkan Studi, atau Wirausaha.
+            </p>
+            @if(Auth::check())
+                <a href="{{ url('/mbti-test') }}" class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">
                     Mulai Sekarang!
-                </button>
-            </div>
-            <!-- Tengah: Asset HP -->
-            <div class="flex-1 flex flex-col items-center order-1 md:order-2 w-full md:w-1/2">
-                <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-80 md:w-[32rem] shadow-lg mb-6">
-                <!-- Logo Integrasi -->
-                <div class="flex flex-wrap justify-center items-center gap-6 mt-2">
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 object-contain" alt="LinkedIn">
-                    </div>
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 object-contain" alt="Discord">
-                    </div>
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 object-contain" alt="Zoom">
-                    </div>
-                    <div class="bg-white rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 object-contain" alt="Google Meet">
-                    </div>
+                </a>
+            @else
+                <a href="{{ url('/login') }}" class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">
+                    Mulai Sekarang!
+                </a>
+            @endif
+        </div>
+        <!-- Tengah: Asset HP -->
+        <div class="flex-1 flex flex-col items-center order-1 md:order-2 w-full md:w-1/2">
+            <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-80 md:w-[32rem] mb-6">
+            <!-- Logo Integrasi -->
+            <div class="flex flex-wrap justify-center items-center gap-6 mt-2">
+                <div class="flex items-center justify-center h-20 w-20">
+                    <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 object-contain" alt="LinkedIn">
+                </div>
+                <div class="flex items-center justify-center h-20 w-20">
+                    <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 object-contain" alt="Discord">
+                </div>
+                <div class="flex items-center justify-center h-20 w-20">
+                    <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 object-contain" alt="Zoom">
+                </div>
+                <div class="flex items-center justify-center h-20 w-20">
+                    <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 object-contain" alt="Google Meet">
                 </div>
             </div>
         </div>
-        <!-- Gradient indigo bawah ke atas -->
-        <div
-            class="pointer-events-none absolute inset-x-0 bottom-0 h-32 md:h-40 bg-gradient-to-t from-indigo-200/80 via-indigo-300/40 to-transparent">
-        </div>
-    </section>
-
+    </div>
+    <!-- Gradient indigo bawah ke atas -->
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 md:h-40 bg-gradient-to-t from-indigo-200/80 via-indigo-300/40 to-transparent">
+    </div>
+</section>
     <!-- Kenali Potensimu -->
     <section class="max-w-6xl mx-auto px-4 md:px-0 py-20 grid md:grid-cols-2 gap-12 items-center">
         <div>
