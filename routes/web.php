@@ -21,12 +21,11 @@ Route::get('/', function () {
 })->name('dashboard');
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/auth', 'auth')->name('auth.auth');
-    Route::get('/login', 'login')->name('auth.login');
-    Route::post('/login/post', 'postlogin')->name('auth.postlogin');
-    Route::get('/register', 'register')->name('auth.register');
-    Route::post('/register/post', 'postregister')->name('auth.postregister');
-    Route::get('/logout', 'logout')->name('auth.logout');
+    Route::get('/login', 'login')->middleware('guest')->name('auth.login');
+    Route::post('/login/post', 'postlogin')->middleware('guest')->name('auth.postlogin');
+    Route::get('/register', 'register')->middleware('guest')->name('auth.register');
+    Route::post('/register/post', 'postregister')->middleware('guest')->name('auth.postregister');
+    Route::get('/logout', 'logout')->middleware('auth')->name('auth.logout');
 });
 
 Route::controller(TestController::class)->middleware('auth')->group(function () {
@@ -39,9 +38,9 @@ Route::controller(ArticleController::class)->group(function () {
     Route::get('/article', 'index')->name('article.index');
     Route::get('/article/create', 'create')->middleware(['auth', 'can:isAdmin'])->name('article.create');
     Route::post('/article/store', 'store')->middleware(['auth', 'can:isAdmin'])->name('article.store');
-    Route::get('/article/show/{article_id}', 'show')->name('article.show');
-    Route::get('/article/edit/{article_id}', 'edit')->name('article.edit');
-    Route::post('/article/update/{article_id}', 'update')->name('article.update');
-    Route::get('/article/destroy/{article_id}', 'destroy')->name('article.destroy');
-    Route::get('/article/image/destroy/{article_id}', 'imageDestroy')->name('article.imageDestroy');
+    Route::get('/article/show/{article_id}', 'show')->middleware('auth')->name('article.show');
+    Route::get('/article/edit/{article_id}', 'edit')->middleware(['auth', 'can:isAdmin'])->name('article.edit');
+    Route::post('/article/update/{article_id}', 'update')->middleware(['auth', 'can:isAdmin'])->name('article.update');
+    Route::get('/article/destroy/{article_id}', 'destroy')->middleware(['auth', 'can:isAdmin'])->name('article.destroy');
+    Route::get('/article/image/destroy/{article_id}', 'imageDestroy')->middleware(['auth', 'can:isAdmin'])->name('article.imageDestroy');
 });
