@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\AuthAdvertiserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -43,4 +44,9 @@ Route::controller(ArticleController::class)->group(function () {
     Route::post('/article/update/{article_id}', 'update')->middleware(['auth', 'can:isAdmin'])->name('article.update');
     Route::get('/article/destroy/{article_id}', 'destroy')->middleware(['auth', 'can:isAdmin'])->name('article.destroy');
     Route::get('/article/image/destroy/{article_id}', 'imageDestroy')->middleware(['auth', 'can:isAdmin'])->name('article.imageDestroy');
+});
+
+Route::controller(AuthAdvertiserController::class)->middleware('guest')->group(function () {
+    Route::get('/advertiser/register', 'register')->name('advertiser.register');
+    Route::get('/advertiser/resgiter/post', 'postregister')->name('advertiser.postregister');
 });

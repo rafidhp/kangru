@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('advertisers', function (Blueprint $table) {
             $table->id();
+            $table->char('no_telepon');
+            $table->string('instansi');
+            $table->string('NPWP/SIUP');
+            $table->string('status');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

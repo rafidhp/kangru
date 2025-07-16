@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Hashids\Hashids;
-use Illuminate\Support\Facades\Log;
 
 class HashidsService
 {
@@ -22,6 +21,7 @@ class HashidsService
     public function decode($hash)
     {
         $result = $this->hashids->decode($hash);
+
         return $result[0] ?? null;
     }
 }

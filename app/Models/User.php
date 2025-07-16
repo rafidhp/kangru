@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UsersAchievement::class);
     }
+
+    public function advertiser()
+    {
+        return $this->belongsTo(Advertiser::class);
+    }
 }

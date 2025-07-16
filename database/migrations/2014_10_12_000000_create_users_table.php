@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('age');
+            $table->integer('age')->nullable();
             $table->string('mbti_type')->nullable();
             $table->text('mbti_desc')->nullable();
             $table->text('recommendation_career')->nullable();
