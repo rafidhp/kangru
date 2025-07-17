@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Parsedown;
 
 class TestController extends Controller
@@ -93,10 +93,10 @@ class TestController extends Controller
         foreach ($articles as $index => $article) {
             $category = $categoryMap[$article->category_id] ?? 'Tidak diketahui';
 
-            $articlesText .= ($index + 1) . ". ID: {$article->id}\n";
+            $articlesText .= ($index + 1).". ID: {$article->id}\n";
             $articlesText .= "   Judul: {$article->title}\n";
             $articlesText .= "   Kategori: {$category}\n";
-            $articlesText .= "   Isi: " . Str::limit(strip_tags($article->content), 150) . "\n\n";
+            $articlesText .= '   Isi: '.Str::limit(strip_tags($article->content), 150)."\n\n";
         }
 
         $answersText = '';
