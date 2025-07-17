@@ -25,6 +25,9 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 RUN chown -R www-data:www-data /var/www/html \
     && a2enmod rewrite
 
+RUN mkdir -p /var/www/html/public/storage && \
+    cp -r /var/www/html/storage/app/public/* /var/www/html/public/storage/
+
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
