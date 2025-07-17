@@ -17,7 +17,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 RUN mkdir -p /var/www/html/public/storage && \
-    cp -r /var/www/html/storage/app/public/* /var/www/html/public/storage/
+    cp -r /var/www/html/storage/app/public/. /var/www/html/public/storage/
 
 COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
 
