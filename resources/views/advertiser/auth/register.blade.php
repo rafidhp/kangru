@@ -49,7 +49,7 @@
             <p class="text-center text-sm md:text-base text-gray-600 mb-8">
                 Silakan isi data untuk mendaftar
             </p>
-            <form class="space-y-6" action="{{ route('auth.postregister') }}" method="post"
+            <form class="space-y-6" action="{{ route('advertiser.postregister') }}" method="post"
                 enctype="multipart/form-data">
                 @csrf
                 <div>

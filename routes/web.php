@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertiserController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthAdvertiserController;
 use App\Http\Controllers\AuthController;
@@ -48,5 +49,9 @@ Route::controller(ArticleController::class)->group(function () {
 
 Route::controller(AuthAdvertiserController::class)->middleware('guest')->group(function () {
     Route::get('/advertiser/register', 'register')->name('advertiser.register');
-    Route::get('/advertiser/resgiter/post', 'postregister')->name('advertiser.postregister');
+    Route::post('/advertiser/resgiter/post', 'postregister')->name('advertiser.postregister');
+});
+
+Route::controller(AdvertiserController::class)->middleware('auth')->group(function () {
+    Route::get('/advertiser', 'index')->name('advertiser.index');
 });
