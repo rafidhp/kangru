@@ -1,2 +1,5 @@
 *
 !.gitignore
+!advertisement/
+!article/
+!npwp_siup/
