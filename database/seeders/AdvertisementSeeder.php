@@ -15,7 +15,7 @@ class AdvertisementSeeder extends Seeder
         $advertisements = [
             [
                 'title' => 'Test Iklan',
-                'image' => 'https://ik.imagekit.io/rafidhp/kangru/advertise_default.png?updatedAt=1752730458376',
+                'image' => 'advertise_default.png',
                 'description' => 'this is a dummy data advertising test',
                 'upload_date' => '2025-07-17',
                 'category_id' => 1,
