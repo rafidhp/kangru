@@ -74,22 +74,6 @@
                 </div>
 
                 <div>
-                    <p class="font-medium text-gray-700 mb-3">2. Saya lebih suka menghabiskan waktu sendiri untuk
-                        merenung</p>
-                    <div class="flex space-x-3 mt-2">
-                        @foreach (['sangat_tidak_setuju', 'tidak_setuju', 'neutral', 'setuju', 'sangat_setuju'] as $j => $label)
-                            <input type="radio" name="answer_2" id="opt_{{ $j + 1 }}_2"
-                                value="{{ str_replace('_', ' ', $label) }}" class="hidden" required>
-                            <label for="opt_{{ $j + 1 }}_2"
-                                class="cursor-pointer transition rounded-full border-2 border-transparent hover:border-purple-500 hover:scale-110 transform duration-300 ease-in-out shadow-md">
-                                <img src="{{ asset('assets/icon/' . $label . '.png') }}" alt="{{ $label }}"
-                                    class="w-12 h-12" />
-                            </label>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div>
                     <p class="font-medium text-gray-700 mb-3">3. Saya lebih suka bekerja dengan fakta dan data yang
                         jelas</p>
                     <div class="flex space-x-3 mt-2">
