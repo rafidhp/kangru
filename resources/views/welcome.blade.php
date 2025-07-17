@@ -115,6 +115,7 @@
             class="pointer-events-none absolute inset-x-0 bottom-0 h-32 md:h-40 bg-gradient-to-t from-indigo-200/80 via-indigo-300/40 to-transparent">
         </div>
     </section>
+
     <!-- Kenali Potensimu -->
     <section class="max-w-6xl mx-auto px-4 md:px-0 py-20 grid md:grid-cols-2 gap-12 items-center">
         <div>
@@ -169,8 +170,6 @@
                         dunia</span>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
     </section>
 
@@ -234,6 +233,34 @@
         </div>
         <div
             class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-indigo-100/80 via-white/60 to-transparent">
+        </div>
+    </section>
+
+    <!-- Advertiser Unggulan Section -->
+    <section class="max-w-6xl mx-auto px-4 md:px-0 py-20">
+        <div class="flex flex-col md:flex-row items-center gap-8">
+            <!-- Kiri: Teks -->
+            <div class="md:w-1/2">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900">
+                    Bergabunglah bersama kami sebagai <br><span class="text-indigo-600">Advertiser Unggulan!</span>
+                </h2>
+                <p class="text-gray-700 mb-6 leading-relaxed">
+                    Platform kami adalah ekosistem lengkap bagi siapa pun yang serius dalam mengembangkan potensi diri
+                    dan karier. Produk atau layanan Anda akan langsung tersaji kepada audiens yang sangat relevan dan
+                    siap berinvestasi pada masa depan mereka.
+                </p>
+                <a href="#"
+                    class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-full transition-transform duration-200 hover:scale-105">
+                    Daftar Sekarang!
+                </a>
+            </div>
+            <!-- Kanan: Gambar -->
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative bg-indigo-600 rounded-full p-8 max-w-md">
+                    <img src="{{ asset('assets/advertiser_asset.png') }}" alt="Advertiser Illustration"
+                        class="w-full">
+                </div>
+            </div>
         </div>
     </section>
 
