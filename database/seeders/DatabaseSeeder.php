@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             MentorSeeder::class,
             UsersAchievementSeeder::class,
             ArticleSeeder::class,
+            AdvertiserSeeder::class,
+            AdvertisementSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
 

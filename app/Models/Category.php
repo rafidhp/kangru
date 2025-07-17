@@ -24,4 +24,9 @@ class Category extends Model
     {
         return $this->belongTo(Article::class);
     }
+
+    public function advertisment()
+    {
+        return $this->belongsTo(Advertisement::class);
+    }
 }

@@ -45,6 +45,13 @@ class UserSeeder extends Seeder
                 'age' => 16,
                 'role' => 'mentor',
             ],
+            [
+                'username' => 'advertiser',
+                'name' => 'Advertiser',
+                'email' => 'advertiser@gmail.com',
+                'password' => bcrypt('advertiser'),
+                'role' => 'advertiser',
+            ],
         ];
 
         foreach ($users as $user) {

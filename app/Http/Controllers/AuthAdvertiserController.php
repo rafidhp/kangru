@@ -68,6 +68,6 @@ class AuthAdvertiserController extends Controller
 
         $file->storeAs('public/npwp_siup/' . $hashids->encode($user->id) . '_' . $file_name);
 
-        return redirect()->route('advertiser.index')->withSuccess('Registration successful! You can now login!');
+        return redirect()->route('auth.login')->withSuccess('Registration successful! You can now login!');
     }
 }

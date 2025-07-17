@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function advertiser()
     {
-        return $this->belongsTo(Advertiser::class);
+        return $this->hasOne(Advertiser::class);
     }
 }

@@ -13,7 +13,7 @@
 <body class="text-gray-800">
     <!-- Navbar -->
     <header x-data="{ open: false }"
-        class="flex justify-between items-center px-6 md:px-12 py-4 border border-black rounded-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
+        class="flex justify-between items-center px-6 md:px-12 py-4 border border-[#b3b3b3] rounded-b-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
         <div class="flex items-center space-x-2">
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-8">
             <span class="font-semibold">Kangru</span>
@@ -249,7 +249,7 @@
                     dan karier. Produk atau layanan Anda akan langsung tersaji kepada audiens yang sangat relevan dan
                     siap berinvestasi pada masa depan mereka.
                 </p>
-                <a href="#"
+                <a href="{{ route('advertiser.register') }}"
                     class="inline-block bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-full transition-transform duration-200 hover:scale-105">
                     Daftar Sekarang!
                 </a>
