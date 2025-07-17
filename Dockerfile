@@ -16,6 +16,9 @@ WORKDIR /var/www/html
 
 COPY . /var/www/html/
 
+RUN mkdir -p /var/www/html/public/storage && \
+    cp -r /var/www/html/storage/app/public/* /var/www/html/public/storage/
+
 COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
 
 RUN composer install --no-dev --optimize-autoloader
@@ -24,9 +27,6 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 RUN chown -R www-data:www-data /var/www/html \
     && a2enmod rewrite
-
-RUN mkdir -p /var/www/html/public/storage && \
-    cp -r /var/www/html/storage/app/public/* /var/www/html/public/storage/
 
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
