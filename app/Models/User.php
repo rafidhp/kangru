@@ -26,6 +26,7 @@ class User extends Authenticatable
         'mbti_type',
         'mbti_desc',
         'recommendation_career',
+        'recommended_articles',
         'role',
     ];
 

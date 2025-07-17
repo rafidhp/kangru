@@ -13,4 +13,4 @@
 <p>Upload date: {{ \Carbon\Carbon::parse($article->upload_date)->format('d-m-Y') }}</p>
 
 <br><br>
-<a href="{{ route('article.index') }}">Kembali</a>
+<a href="{{ url()->previous() }}">Kembali</a>

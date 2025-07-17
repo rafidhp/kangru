@@ -15,7 +15,7 @@ class ArticleSeeder extends Seeder
         $articles = [
             [
                 'title' => 'Test Article',
-                'image' => 'https://ik.imagekit.io/rafidhp/kangru/default_article.jpg?updatedAt=1752264044993',
+                'image' => 'python.png',
                 'content' => 'This is test article content
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit. Assumenda molestiae culpa repudiandae excepturi voluptates iure beatae rem aspernatur qui, impedit consequatur doloremque nulla magni amet optio sit, distinctio, praesentium corrupti.',
                 'upload_date' => '2025-07-12',

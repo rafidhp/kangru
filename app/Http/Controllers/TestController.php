@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Parsedown;
@@ -77,6 +79,26 @@ class TestController extends Controller
             15 => 'Seberapa besar kamu ingin bisnis atau pekerjaanmu di masa depan berdampak positif pada masyarakat?',
         ];
 
+        $articles = Article::all();
+        $categoryMap = [
+            1 => 'Kuliah',
+            2 => 'Kerja',
+            3 => 'Wirausaha',
+            4 => 'Kerja dan Kuliah',
+            5 => 'Kuliah dan Wirausaha',
+            6 => 'Kerja dan Wirausaha',
+        ];
+
+        $articlesText = '';
+        foreach ($articles as $index => $article) {
+            $category = $categoryMap[$article->category_id] ?? 'Tidak diketahui';
+
+            $articlesText .= ($index + 1) . ". ID: {$article->id}\n";
+            $articlesText .= "   Judul: {$article->title}\n";
+            $articlesText .= "   Kategori: {$category}\n";
+            $articlesText .= "   Isi: " . Str::limit(strip_tags($article->content), 150) . "\n\n";
+        }
+
         $answersText = '';
         foreach ($questions as $key => $question) {
             $answer = $request->input("answer_$key");
@@ -115,22 +137,67 @@ class TestController extends Controller
         ]);
         $recommendation = trim($response3->json('candidates.0.content.parts.0.text'));
 
+        // prompt and response 4
+        $prompt4 = <<<PROMPT
+            Saya memiliki tipe MBTI {$mbtiType} dan telah mengisi jawaban sebagai berikut:
+
+            {$answersText}
+
+            Saya juga memiliki beberapa referensi artikel berikut:
+
+            {$articlesText}
+
+            Berdasarkan tipe MBTI saya, jawaban saya, dan referensi artikel tersebut, tolong berikan saya rekomendasi artikel yang bisa saya baca dan jadikan referensi ke depannya. Rekomendasi bisa didasarkan pada:
+            1. Kategori artikel (lebih utama)
+            2. Isi artikel (jika kategori kurang relevan)
+            3. Judul artikel (jika isi juga tidak membantu)
+
+            Saya hanya membutuhkan **maksimal 3 artikel saja** (boleh kurang dari 3 jika data tidak cukup, atau jika tidak ada yang relevan kemablikan "null" saja). Kembalikan hanya ID-nya dalam bentuk array tanpa penjelasan lain. Contoh format:
+            [1, 4, 7]
+
+            Jangan gunakan huruf atau karakter lain selain angka dan tanda kurung siku.
+            PROMPT;
+
+        $response4 = Http::post($api_url, [
+            'contents' => [['parts' => [['text' => $prompt4]]]],
+        ]);
+        $responseText = trim($response4->json('candidates.0.content.parts.0.text'));
+
+        if (strtolower($responseText) === 'null') {
+            $array_articles = [];
+        } else {
+            $array_articles = json_decode($responseText, true) ?? [];
+        }
+
+        if (empty($array_articles)) {
+            $recommended_articles = collect();
+        } else {
+            $recommended_articles = Article::whereIn('id', $array_articles)->get();
+        }
+
         $parsedown = new Parsedown;
         $descriptionHtml = $parsedown->text($description);
         $recommendationHtml = $parsedown->text($recommendation);
 
-        $user = User::where('id', Auth::user()->id)->get();
+        $user = User::where('id', Auth::user()->id)->first();
 
-        $user[0]->update([
+        logger([
+            'saving_articles' => $array_articles,
+            'encoded' => json_encode($array_articles),
+        ]);
+
+        $user->update([
             'mbti_type' => $mbtiType,
             'mbti_desc' => $descriptionHtml,
             'recommendation_career' => $recommendationHtml,
+            'recommended_articles' => json_encode($array_articles),
         ]);
 
         return redirect()->route('mbti_test.result')->with([
             'mbtiType' => $mbtiType,
             'description' => $descriptionHtml,
             'recommendation' => $recommendationHtml,
+            'recommendedArticles' => $recommended_articles,
         ]);
     }
 
@@ -140,7 +207,14 @@ class TestController extends Controller
         $mbtiType = $user[0]->mbti_type;
         $description = $user[0]->mbti_desc;
         $recommendation = $user[0]->recommendation_career;
+        $recommendedArticlesIds = json_decode($user[0]->recommended_articles, true);
 
-        return view('mbti_test.result', compact('mbtiType', 'description', 'recommendation'));
+        if (is_array($recommendedArticlesIds) && count($recommendedArticlesIds)) {
+            $recommendedArticles = Article::whereIn('id', $recommendedArticlesIds)->get();
+        } else {
+            $recommendedArticles = collect();
+        }
+
+        return view('mbti_test.result', compact('mbtiType', 'description', 'recommendation', 'recommendedArticles'));
     }
 }

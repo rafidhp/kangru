@@ -19,7 +19,8 @@
     </style>
 </head>
 
-<body class="text-gray-900 bg-gradient-to-br from-purple-50 via-white to-purple-50 min-h-screen font-sans antialiased">
+<body
+    class="text-gray-900 bg-gradient-to-br my-10 from-purple-50 via-white to-purple-50 min-h-screen font-sans antialiased">
 
     <form action="{{ route('mbti_test.store') }}" method="post"
         class="max-w-4xl mx-auto py-16 px-8 space-y-12 bg-white rounded-3xl shadow-2xl border border-purple-300">
@@ -323,6 +324,12 @@
     {{-- Tombol kembali fix --}}
     <a href="{{ route('dashboard') }}"
         class="fixed bottom-6 left-6 px-8 py-3 bg-gray-200 rounded-2xl hover:bg-gray-300 transition duration-300 ease-in-out shadow-md">Kembali</a>
+
+    @if (Auth::user()->mbti_type != null)
+        <a href="{{ route('mbti_test.result') }}"
+            class="fixed bottom-6 right-6 px-8 py-3 bg-gray-200 rounded-2xl hover:bg-gray-300 transition duration-300 ease-in-out shadow-md">Previous
+            Result</a>
+    @endif
 
     {{-- Script highlight pilihan & pagination --}}
     <script>
