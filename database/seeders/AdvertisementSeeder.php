@@ -20,7 +20,7 @@ class AdvertisementSeeder extends Seeder
                 'upload_date' => '2025-07-17',
                 'category_id' => 1,
                 'advertiser_id' => 1,
-            ]
+            ],
         ];
 
         foreach ($advertisements as $advertisement) {

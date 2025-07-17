@@ -14,10 +14,12 @@
     <!-- Navbar -->
     <header x-data="{ open: false }"
         class="flex justify-between items-center px-6 md:px-12 py-4 border border-[#b3b3b3] rounded-b-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
-        <div class="flex items-center space-x-2">
-            <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-8">
-            <span class="font-semibold">Kangru</span>
-        </div>
+        <a href="{{ route('dashboard') }}">
+            <div class="flex items-center space-x-2">
+                <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-8">
+                <span class="font-semibold">Kangru</span>
+            </div>
+        </a>
         <nav :class="{ 'block': open, 'hidden': !open }"
             class="absolute top-full left-0 w-full bg-white/90 backdrop-blur-md md:static md:block md:w-auto md:bg-transparent md:backdrop-blur-0 md:flex md:space-x-6">
             <a href="{{ url('/') }}"
@@ -398,8 +400,8 @@
                     <h3 class="text-gray-900 font-semibold mb-4">Product</h3>
                     <ul class="space-y-2 text-gray-600 text-sm">
                         <li><a href="{{ url('/') }}" class="hover:text-indigo-600">Beranda</a></li>
-                        <li><a href="{{ url('/artikel') }}" class="hover:text-indigo-600">Artikel</a></li>
-                        <li><a href="{{ url('/tes-kepribadian') }}" class="hover:text-indigo-600">Tes Minat Bakat</a>
+                        <li><a href="{{ route('article.index') }}" class="hover:text-indigo-600">Artikel</a></li>
+                        <li><a href="{{ route('mbti_test') }}" class="hover:text-indigo-600">Tes Minat Bakat</a>
                         </li>
                         <li><a href="#faq" class="hover:text-indigo-600">FAQ</a></li>
                     </ul>
@@ -421,7 +423,8 @@
                         <li><a href="#" class="hover:text-indigo-600">Twitter</a></li>
                         <li><a href="#" class="hover:text-indigo-600">Facebook</a></li>
                         <li><a href="#" class="hover:text-indigo-600">LinkedIn</a></li>
-                        <li><a href="#" class="hover:text-indigo-600">Github</a></li>
+                        <li><a href="https://github.com/rafidhp/kangru" target="_blank"
+                                class="hover:text-indigo-600">Github</a></li>
                     </ul>
                 </div>
             </div>

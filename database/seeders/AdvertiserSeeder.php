@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Advertiser;
+use Illuminate\Database\Seeder;
 
 class AdvertiserSeeder extends Seeder
 {

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertiser;
+use App\Models\User;
+use App\Services\HashidsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use App\Models\User;
-use App\Models\Advertiser;
-use App\Services\HashidsService;
 
 class AuthAdvertiserController extends Controller
 {
@@ -54,7 +54,7 @@ class AuthAdvertiserController extends Controller
         $file_name = $file->getClientOriginalName();
         $directory = storage_path('/app/public/npwp_siup');
 
-        if (!File::exists($directory)) {
+        if (! File::exists($directory)) {
             File::makeDirectory($directory, 0755, true);
         }
 
@@ -66,7 +66,7 @@ class AuthAdvertiserController extends Controller
             'user_id' => $user->id,
         ]);
 
-        $file->storeAs('public/npwp_siup/' . $hashids->encode($user->id) . '_' . $file_name);
+        $file->storeAs('public/npwp_siup/'.$hashids->encode($user->id).'_'.$file_name);
 
         return redirect()->route('auth.login')->withSuccess('Registration successful! You can now login!');
     }

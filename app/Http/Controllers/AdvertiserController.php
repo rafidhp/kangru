@@ -11,6 +11,7 @@ class AdvertiserController extends Controller
     {
         $advertiser_id = Auth::user()->advertiser->id;
         $advertisements = Advertisement::where('advertiser_id', $advertiser_id)->get();
+
         return view('advertiser.index', compact('advertisements'));
     }
 }
