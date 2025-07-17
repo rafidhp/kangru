@@ -42,16 +42,16 @@
 
                 {{-- Pertanyaan 1–5 --}}
                 <div>
-                    <p class="font-semibold text-gray-800 mb-4 leading-relaxed text-lg">1. Saya merasa nyaman berbicara
+                    <p class="font-semibold text-gray-700 mb-3">1. Saya merasa nyaman berbicara
                         di depan banyak orang</p>
-                    <div class="flex space-x-4 mt-3">
+                    <div class="flex space-x-3 mt-3">
                         @foreach (['sangat_tidak_setuju', 'tidak_setuju', 'neutral', 'setuju', 'sangat_setuju'] as $j => $label)
                             <input type="radio" name="answer_1" id="opt_{{ $j + 1 }}_1"
                                 value="{{ str_replace('_', ' ', $label) }}" class="hidden" required>
                             <label for="opt_{{ $j + 1 }}_1"
                                 class="cursor-pointer transition rounded-full border-2 border-transparent hover:border-purple-600 hover:scale-125 transform duration-300 ease-in-out shadow-lg">
                                 <img src="{{ asset('assets/icon/' . $label . '.png') }}" alt="{{ $label }}"
-                                    class="w-14 h-14" />
+                                    class="w-12 h-12" />
                             </label>
                         @endforeach
                     </div>
