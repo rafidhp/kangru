@@ -19,34 +19,50 @@
     </style>
 </head>
 
-<body class="text-gray-900 bg-gradient-to-br from-purple-50 via-white to-purple-50 min-h-screen">
+<body class="text-gray-900 bg-gradient-to-br from-purple-50 via-white to-purple-50 min-h-screen font-sans antialiased">
 
     <form action="{{ route('mbti_test.store') }}" method="post"
-        class="max-w-4xl mx-auto py-12 px-6 space-y-10 bg-white rounded-3xl shadow-xl border border-purple-200">
+        class="max-w-4xl mx-auto py-16 px-8 space-y-12 bg-white rounded-3xl shadow-2xl border border-purple-300">
         @csrf
-        <h1 class="text-3xl font-extrabold text-center mb-8 text-purple-700 tracking-wide">Tes Kepribadian</h1>
+        <h1 class="text-4xl font-extrabold text-center mb-10 text-purple-700 tracking-wider drop-shadow-md">Tes Kepribadian</h1>
 
         {{-- Cards --}}
-        <div class="mb-6">
-            <div class="w-full bg-gray-200 rounded-full h-4">
-                <div id="progressBar" class="bg-purple-600 h-4 rounded-full transition-all duration-300"
-                    style="width: 0%;"></div>
+        <div class="mb-8">
+            <div class="w-full bg-gray-300 rounded-full h-5 shadow-inner">
+                <div id="progressBar" class="bg-purple-700 h-5 rounded-full transition-all duration-500 ease-in-out"
+                    style="width: 0%; box-shadow: 0 0 10px 2px rgba(128, 90, 213, 0.7);"></div>
             </div>
-            <p class="text-center mt-2 text-purple-700 font-semibold" id="progressText">Card 1 of 4</p>
+            <p class="text-center mt-3 text-purple-700 font-semibold tracking-wide" id="progressText">Card 1 of 4</p>
         </div>
-        <div id="cardsWrapper" class="space-y-10">
+        <div id="cardsWrapper" class="space-y-12">
             {{-- Card 1 --}}
-            <div id="card-0" class="card bg-white rounded-3xl shadow-lg p-8 space-y-6 border border-purple-100">
-                <h2 class="text-xl font-semibold mb-4 text-purple-600 tracking-wide">Bagian 1</h2>
+            <div id="card-0" class="card bg-white rounded-3xl shadow-xl p-10 space-y-8 border border-purple-200">
+                <h2 class="text-2xl font-semibold mb-6 text-purple-700 tracking-wide drop-shadow-sm">Bagian 1</h2>
 
                 {{-- Pertanyaan 1–5 --}}
                 <div>
-                    <p class="font-medium text-gray-700 mb-3">1. Saya merasa nyaman berbicara di depan banyak orang</p>
-                    <div class="flex space-x-3 mt-2">
+                    <p class="font-semibold text-gray-800 mb-4 leading-relaxed text-lg">1. Saya merasa nyaman berbicara di depan banyak orang</p>
+                    <div class="flex space-x-4 mt-3">
                         @foreach (['sangat_tidak_setuju', 'tidak_setuju', 'neutral', 'setuju', 'sangat_setuju'] as $j => $label)
                             <input type="radio" name="answer_1" id="opt_{{ $j + 1 }}_1"
                                 value="{{ str_replace('_', ' ', $label) }}" class="hidden" required>
                             <label for="opt_{{ $j + 1 }}_1"
+                                class="cursor-pointer transition rounded-full border-2 border-transparent hover:border-purple-600 hover:scale-125 transform duration-300 ease-in-out shadow-lg">
+                                <img src="{{ asset('assets/icon/' . $label . '.png') }}" alt="{{ $label }}"
+                                    class="w-14 h-14" />
+                            </label>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div>
+                    <p class="font-medium text-gray-700 mb-3">2. Saya lebih suka menghabiskan waktu sendiri untuk
+                        merenung</p>
+                    <div class="flex space-x-3 mt-2">
+                        @foreach (['sangat_tidak_setuju', 'tidak_setuju', 'neutral', 'setuju', 'sangat_setuju'] as $j => $label)
+                            <input type="radio" name="answer_2" id="opt_{{ $j + 1 }}_2"
+                                value="{{ str_replace('_', ' ', $label) }}" class="hidden" required>
+                            <label for="opt_{{ $j + 1 }}_2"
                                 class="cursor-pointer transition rounded-full border-2 border-transparent hover:border-purple-500 hover:scale-110 transform duration-300 ease-in-out shadow-md">
                                 <img src="{{ asset('assets/icon/' . $label . '.png') }}" alt="{{ $label }}"
                                     class="w-12 h-12" />
