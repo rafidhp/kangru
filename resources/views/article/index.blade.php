@@ -3,6 +3,9 @@
 @if (session('success'))
     {{ session('success') }}
 @endif
+
+@auth
+@if (Auth::user()->role === 'admin')
 <table>
     <tr>
         <th>No</th>
@@ -54,3 +57,5 @@
     <br><br>
 @endcan
 <a href="{{ route('dashboard') }}">Kembali</a>
+@endauth
+@endif

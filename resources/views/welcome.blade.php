@@ -22,28 +22,32 @@
         </a>
         <nav :class="{ 'block': open, 'hidden': !open }"
             class="absolute top-full left-0 w-full bg-white/90 backdrop-blur-md md:static md:block md:w-auto md:bg-transparent md:backdrop-blur-0 md:flex md:space-x-6">
+
             <a href="{{ url('/') }}"
-                class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+                class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Beranda
                 @if (request()->is('/'))
-                    <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
+                    <span class="block w-6 h-1 bg-indigo-600"></span>
                 @endif
             </a>
+
             <a href="{{ url('/article') }}"
-                class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('article') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+                class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('article') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Artikel
                 @if (request()->is('article'))
-                    <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
+                    <span class="block w-6 h-1 bg-indigo-600"></span>
                 @endif
             </a>
+
             <a href="{{ url('/mbti-test') }}"
-                class="block px-4 py-2 md:flex md:flex-col md:items-center {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
+                class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Tes Kepribadian
                 @if (request()->is('tes-kepribadian'))
-                    <span class="block w-6 h-1 bg-indigo-600 rounded mt-1"></span>
+                    <span class="block w-6 h-1 bg-indigo-600"></span>
                 @endif
             </a>
         </nav>
+
         @if (Auth::check())
             <div x-data="{ openProfile: false }" class="relative block px-4 py-2 md:flex md:flex-col md:items-center">
                 <button @click="openProfile = !openProfile"
@@ -320,7 +324,7 @@
                             @endfor
                         </span>
                     </div>
-                    <p class="text-gray-800 leading-relaxed text-lg font-medium">
+                    <p class="text-gray-800 leading-relaxed text-lg font-small italic">
                         "Kangru benar-benar membantu saya memahami potensi diri dan menentukan pilihan karir yang tepat.
                         Dengan fitur-fiturnya yang interaktif dan informatif, saya bisa mengeksplorasi berbagai peluang
                         kerja yang sesuai dengan minat dan kemampuan saya. Aplikasi ini seperti teman yang selalu siap
@@ -345,7 +349,7 @@
                             @endfor
                         </span>
                     </div>
-                    <p class="text-gray-800 leading-relaxed text-lg font-medium">
+                    <p class="text-gray-800 leading-relaxed text-lg font-small italic">
                         "Saya sangat terbantu dengan Kangru! Aplikasi ini memberikan wawasan yang jelas tentang berbagai
                         jalur karir yang cocok dengan kepribadian dan keterampilan saya. Panduannya mudah dipahami, dan
                         saya merasa lebih percaya diri dalam mengambil langkah menuju masa depan. Rasanya seperti punya
