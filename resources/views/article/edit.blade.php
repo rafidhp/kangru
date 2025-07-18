@@ -1,5 +1,7 @@
 <h2>Edit Article</h2>
 
+@auth
+@if (Auth::user()->role === 'admin')
 <form action="{{ route('article.update', ['article_id' => $article->hashid]) }}" method="post"
     enctype="multipart/form-data">
     @csrf
@@ -36,3 +38,5 @@
 
 <br>
 <a href="{{ route('article.index') }}">Kembali</a>
+@endauth
+@endif
