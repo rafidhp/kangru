@@ -358,7 +358,7 @@
     </section>
 
     <!-- FAQ -->
-    <section class="max-w-4xl mx-auto py-16 px-4" x-data="{ openIndex: null }">
+    <section id="faq" class="max-w-4xl mx-auto py-16 px-4" x-data="{ openIndex: null }">
         <h2 class="text-center text-2xl font-semibold mb-8">Pertanyaan yang Sering Diajukan</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <template
