@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/rafidhp/kangru" target="_blank"><img src="https://ik.imagekit.io/rafidhp/kangru/kangru-logo.png?updatedAt=1751813422158" width="400" alt="kangru logo"></a></p>
+<p align="center"><a href="https://github.com/rafidhp/kangru" target="_blank"><img src="https://ik.imagekit.io/rafidhp/kangru-logo.png?updatedAt=1753561462640" width="400" alt="kangru logo"></a></p>
 
 <p align="center">
     <a href="https://github.com/rafidhp/kangru">

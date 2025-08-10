@@ -1,4 +1,7 @@
 <h2>Create Article</h2>
+
+@auth
+@if (Auth::user()->role === 'admin')
 <form action="{{ route('article.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="text" name="title" placeholder="article title" value="{{ old('title') }}" required>
@@ -33,3 +36,6 @@
     <br><br>
     <a href="{{ route('article.index') }}">Kembali</a>
 </form>
+@endif
+@endauth
+
