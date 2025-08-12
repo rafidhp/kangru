@@ -4,8 +4,6 @@
     {{ session('success') }}
 @endif
 
-@auth
-@if (Auth::user()->role === 'admin')
 <table>
     <tr>
         <th>No</th>
@@ -26,8 +24,8 @@
                 </td>
             @else
                 <td>
-                    <img src="https://ik.imagekit.io/rafidhp/kangru/default_article.jpg?updatedAt=1752264044993"
-                        alt="article_template" style="width: 150px">
+                    <img src="{{ asset('storage/article/article_template.jpg') }}" alt="article_template"
+                        style="width: 150px">
                 </td>
             @endif
             <td>{{ $article->title }}</td>
@@ -57,5 +55,3 @@
     <br><br>
 @endcan
 <a href="{{ route('dashboard') }}">Kembali</a>
-@endauth
-@endif
