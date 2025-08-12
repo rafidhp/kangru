@@ -37,6 +37,6 @@
 </table>
 
 <br><br>
-<a href="{{ route('advertiser.create') }}">Create Advertisement</a>
+<a href="{{ route('ad.create') }}">Create Advertisement</a>
 <br><br>
 <a href="{{ route('auth.logout') }}">logout</a>

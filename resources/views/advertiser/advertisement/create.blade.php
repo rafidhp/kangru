@@ -4,7 +4,7 @@
     {{ $message }}
 @endif
 
-<form action="{{ route('advertiser.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('ad.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <input type="text" name="title" placeholder="advertise title">
     <label for="image">Advertise image</label>
