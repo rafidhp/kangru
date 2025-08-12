@@ -47,8 +47,16 @@ class AdvertisementController extends Controller
             'advertiser_id' => $advertiser_id,
         ]);
 
-        $image->storeAs('/public/advertisement/'.$hashids->encode($advertisement->id).'_'.$image_name);
+        $image->storeAs('/public/advertisement/' . $hashids->encode($advertisement->id) . '_' . $image_name);
 
         return redirect()->route('advertiser.index')->withSuccess('Advertisement successfully created!');
+    }
+
+    public function edit(HashidsService $hashids, $ad_id)
+    {
+        $id = $hashids->decode($ad_id);
+        $advertisement = Advertisement::findOrFail($id);
+
+        return view('advertiser.advertisement.edit', compact('advertisement'));
     }
 }

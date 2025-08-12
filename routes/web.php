@@ -58,6 +58,7 @@ Route::controller(AdvertiserController::class)->middleware('auth')->group(functi
 });
 
 Route::controller(AdvertisementController::class)->middleware('auth')->group(function () {
-    Route::get('/advertiser/create', 'create')->name('advertiser.create');
-    Route::post('/advertiser/store', 'store')->name('advertiser.store');
+    Route::get('/ad/create', 'create')->name('ad.create');
+    Route::post('/ad/store', 'store')->name('ad.store');
+    Route::get('/ad/edit/{ad_id}', 'edit')->name('ad.edit');
 });

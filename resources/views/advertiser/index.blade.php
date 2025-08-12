@@ -27,7 +27,11 @@
             </td>
             <td>{{ \Illuminate\Support\Str::limit($advertisement->description, 100, '...') }}</td>
             <td>{{ $advertisement->category->category_name }}</td>
-            <td>aksiong</td>
+            <td>
+                <a href="">View Detail</a>
+                <a href="{{ route('ad.edit', ['ad_id' => $advertisement->hashid]) }}">Edit</a>
+                <a href="">Delete</a>
+            </td>
         </tr>
     @endforeach
 </table>
