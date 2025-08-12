@@ -1,7 +1,11 @@
 <h2>Edit advertisment data</h2>
 
-@if (session('error'))
-    {{ session('error') }}
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
 @endif
 
 {{ dd($advertisement) }}

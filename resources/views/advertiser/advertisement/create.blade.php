@@ -1,7 +1,11 @@
 <h2>Create Advertisement</h2>
 
-@if (session('error'))
-    {{ $message }}
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
 @endif
 
 <form action="{{ route('ad.store') }}" method="post" enctype="multipart/form-data">
