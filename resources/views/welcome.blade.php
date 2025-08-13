@@ -100,18 +100,18 @@
             <div class="flex-1 flex flex-col items-center order-1 md:order-2 w-full md:w-1/2">
                 <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-80 md:w-[32rem] mb-6">
                 <!-- Logo Integrasi -->
-                <div class="flex flex-wrap justify-center items-center gap-6 mt-2">
+                <div class="flex flex-wrap justify-center items-center gap-12 mt-2">
                     <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 object-contain" alt="LinkedIn">
+                        <img src="{{ asset('assets/linkedin.png') }}" class="h-20 w-20 object-contain" alt="LinkedIn">
                     </div>
                     <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 object-contain" alt="Discord">
+                        <img src="{{ asset('assets/discord.png') }}" class="h-20 w-20 object-contain" alt="Discord">
                     </div>
                     <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 object-contain" alt="Zoom">
+                        <img src="{{ asset('assets/zoom.png') }}" class="h-20 w-20 object-contain" alt="Zoom">
                     </div>
                     <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 object-contain" alt="Google Meet">
+                        <img src="{{ asset('assets/meet.png') }}" class="h-20 w-20 object-contain" alt="Google Meet">
                     </div>
                 </div>
             </div>
