@@ -27,7 +27,7 @@
                 class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Beranda
                 @if (request()->is('/'))
-                    <span class="block w-6 h-1 bg-indigo-600"></span>
+                    <span class="block w-6 h-1 bg-indigo-600 rounded-full"></span>
                 @endif
             </a>
 
@@ -35,7 +35,7 @@
                 class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('article') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Artikel
                 @if (request()->is('article'))
-                    <span class="block w-6 h-1 bg-indigo-600"></span>
+                    <span class="block w-6 h-1 bg-indigo-600 rounded-full"></span>
                 @endif
             </a>
 
@@ -43,7 +43,7 @@
                 class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
                 Tes Kepribadian
                 @if (request()->is('tes-kepribadian'))
-                    <span class="block w-6 h-1 bg-indigo-600"></span>
+                    <span class="block w-6 h-1 bg-indigo-600 rounded-full"></span>
                 @endif
             </a>
         </nav>
