@@ -30,10 +30,15 @@
             <td>
                 <a href="">View Detail</a>
                 <a href="{{ route('ad.edit', ['ad_id' => $advertisement->hashid]) }}">Edit</a>
-                <a href="">Delete</a>
+                <a href="{{ route('ad.destroy', ['ad_id' => $advertisement->hashid]) }}">Delete</a>
             </td>
         </tr>
     @endforeach
+    @empty($advertisement)
+        <tr>
+            <td colspan="100%">Anda belum membuat iklan! <a href="{{ route('ad.create') }}">Buat iklan sekarang!</a></td>
+        </tr>
+    @endempty
 </table>
 
 <br><br>

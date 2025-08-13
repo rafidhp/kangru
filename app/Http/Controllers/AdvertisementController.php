@@ -9,6 +9,7 @@ use App\Services\HashidsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AdvertisementController extends Controller
 {
@@ -97,5 +98,18 @@ class AdvertisementController extends Controller
         return redirect()->route('advertiser.index')->withSuccess('Advertisement successfully updated!');
     }
 
-    public function destroy() {}
+    public function destroy(HashidsService $hashids, $ad_id)
+    {
+        $id = $hashids->decode($ad_id);
+        $ad = Advertisement::findOrFail($id);
+
+        $image_path = 'advertisement/' . $ad_id . '_' . $ad->image;
+
+        if (Storage::disk('public')->exists($image_path)) {
+            Storage::disk('public')->delete($image_path);
+        }
+        $ad->delete();
+
+        return redirect()->route('advertiser.index')->withSuccess('Advertisement deleted successfully!');
+    }
 }

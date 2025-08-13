@@ -62,4 +62,5 @@ Route::controller(AdvertisementController::class)->middleware('auth')->group(fun
     Route::post('/ad/store', 'store')->name('ad.store');
     Route::get('/ad/edit/{ad_id}', 'edit')->name('ad.edit');
     Route::post('/ad/post/{ad_id}', 'update')->name('ad.update');
+    Route::get('/ad/destroy/{ad_id}', 'destroy')->name('ad.destroy');
 });
