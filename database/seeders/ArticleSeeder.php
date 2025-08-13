@@ -21,6 +21,19 @@ class ArticleSeeder extends Seeder
                 'upload_date' => '2025-07-12',
                 'category_id' => 1,
             ],
+            [
+                'title' => 'Kuliah Bro',
+                'image' => 'images.jpeg',
+                'content' => 'kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro kuliah bro',
+                'upload_date' => '2025-07-17',
+                'category_id' => 1,
+            ],
+            [
+                'title' => 'kerja hahaha',
+                'content' => 'kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha kerja hahaha',
+                'upload_date' => '2025-07-17',
+                'category_id' => 2,
+            ],
         ];
 
         foreach ($articles as $article) {
