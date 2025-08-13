@@ -290,7 +290,7 @@
                 <img src="{{ asset('assets/pagun.png') }}"
                     class="mb-4 rounded-full h-24 w-24 object-cover border-4 border-indigo-100 shadow">
                 <p class="font-semibold text-lg text-indigo-700">Gunawan Busyaeri</p>
-                <span class="text-gray-500 text-sm mt-1">Caravan Studios</span>
+                <span class="text-gray-500 text-sm mt-1">Karavan Studios</span>
             </div>
             <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition">
                 <img src="{{ asset('assets/nanda.png') }}"
