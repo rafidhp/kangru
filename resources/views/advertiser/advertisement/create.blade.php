@@ -10,7 +10,7 @@
 
 <form action="{{ route('ad.store') }}" method="post" enctype="multipart/form-data">
     @csrf
-    <input type="text" name="title" placeholder="advertise title">
+    <input type="text" name="title" placeholder="ad title">
     <label for="image">Advertise image</label>
     <input type="file" name="image" id="image">
     <label for="description">Description</label>

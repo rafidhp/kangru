@@ -14,6 +14,13 @@ class AdvertiserSeeder extends Seeder
     {
         $advertisers = [
             [
+                'no_telepon' => '081122334455',
+                'instansi' => 'Universitas Pendidikan Indonesia',
+                'NPWP/SIUP' => 'template_pdf.pdf',
+                'status' => 'active',
+                'user_id' => 1,
+            ],
+            [
                 'no_telepon' => '081234567890',
                 'instansi' => 'Universitas Indonesia',
                 'NPWP/SIUP' => 'template_pdf.pdf',

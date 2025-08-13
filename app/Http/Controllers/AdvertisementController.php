@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advertisement;
+use App\Models\Advertiser;
 use App\Models\Category;
 use App\Services\HashidsService;
 use Illuminate\Http\Request;
@@ -55,8 +56,46 @@ class AdvertisementController extends Controller
     public function edit(HashidsService $hashids, $ad_id)
     {
         $id = $hashids->decode($ad_id);
-        $advertisement = Advertisement::findOrFail($id);
+        $ad = Advertisement::findOrFail($id);
+        $categories = Category::all();
 
-        return view('advertiser.advertisement.edit', compact('advertisement'));
+        return view('advertiser.advertisement.edit', compact('ad', 'categories'));
     }
+
+    public function update(Request $request, HashidsService $hashids, $ad_id)
+    {
+        $id = $hashids->decode($ad_id);
+        $ad = Advertisement::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:100|min:3',
+            'image' => 'image|mimes:png,jpg,jpeg,gif,svg,webp|max:10240',
+            'description' => 'required|min:10',
+            'category_id' => 'required|integer',
+        ]);
+
+        if ($request->image != null) {
+            $image = $request->file('image');
+            $image_name = $image->getClientOriginalName();
+
+            $ad->update([
+                'title' => $request->title,
+                'image' => $image_name,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+            ]);
+
+            $image->storeAs('/public/advertisement/' . $hashids->encode($ad->id) . '_' . $image_name);
+        } else {
+            $ad->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category_id,
+            ]);
+        }
+
+        return redirect()->route('advertiser.index')->withSuccess('Advertisement successfully updated!');
+    }
+
+    public function destroy() {}
 }
