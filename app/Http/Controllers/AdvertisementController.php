@@ -54,6 +54,14 @@ class AdvertisementController extends Controller
         return redirect()->route('advertiser.index')->withSuccess('Advertisement successfully created!');
     }
 
+    public function view(HashidsService $hashids, $ad_id)
+    {
+        $id = $hashids->decode($ad_id);
+        $ad = Advertisement::findOrFail($id);
+
+        return view('advertiser.advertisement.view', compact('ad'));
+    }
+
     public function edit(HashidsService $hashids, $ad_id)
     {
         $id = $hashids->decode($ad_id);

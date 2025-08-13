@@ -25,10 +25,10 @@
                 <img src="{{ asset('storage/advertisement/' . $advertisement->hashid . '_' . $advertisement->image) }}"
                     alt="advertisement image" style="width: 150px">
             </td>
-            <td>{{ \Illuminate\Support\Str::limit($advertisement->description, 100, '...') }}</td>
+            <td>{{ \Illuminate\Support\Str::limit($advertisement->description, 80, '...') }}</td>
             <td>{{ $advertisement->category->category_name }}</td>
             <td>
-                <a href="">View Detail</a>
+                <a href="{{ route('ad.view', ['ad_id' => $advertisement->hashid]) }}">View Detail</a>
                 <a href="{{ route('ad.edit', ['ad_id' => $advertisement->hashid]) }}">Edit</a>
                 <a href="{{ route('ad.destroy', ['ad_id' => $advertisement->hashid]) }}">Delete</a>
             </td>

@@ -60,6 +60,7 @@ Route::controller(AdvertiserController::class)->middleware('auth')->group(functi
 Route::controller(AdvertisementController::class)->middleware('auth')->group(function () {
     Route::get('/ad/create', 'create')->name('ad.create');
     Route::post('/ad/store', 'store')->name('ad.store');
+    Route::get('/ad/view/{ad_id}', 'view')->name('ad.view');
     Route::get('/ad/edit/{ad_id}', 'edit')->name('ad.edit');
     Route::post('/ad/post/{ad_id}', 'update')->name('ad.update');
     Route::get('/ad/destroy/{ad_id}', 'destroy')->name('ad.destroy');
