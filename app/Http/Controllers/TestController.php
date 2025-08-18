@@ -114,31 +114,44 @@ class TestController extends Controller
         }
 
         $apiKey = env('GEMINI_API_KEY');
-        $api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey";
+        
+        // Debug: Check if API key exists
+        if (!$apiKey) {
+            logger('GEMINI_API_KEY not found in environment - using fallback data');
+            // Fallback untuk testing
+            $mbtiType = 'INTJ-A';
+            $description = '<p><strong>INTJ-A (Architect)</strong> adalah tipe kepribadian yang dikenal sebagai pemikir strategis dan visioner. Mereka memiliki kemampuan analitis yang kuat dan selalu mencari cara untuk meningkatkan sistem dan proses.</p>';
+            $recommendation = '<p>Berdasarkan profil Anda, disarankan untuk fokus pada bidang <strong>teknologi atau sains</strong>. Anda cocok untuk pekerjaan yang membutuhkan pemikiran strategis seperti software engineer, data scientist, atau research analyst.</p>';
+            $recommended_articles = collect();
+            $array_articles = [];
+        } else {
+            $api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey";
 
-        // prompt and response 1
-        $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya (contohnya seperti INFJ-T, ESTP-A, dst.) tanpa penjelasan.";
-        $response1 = Http::post($api_url, [
-            'contents' => [['parts' => [['text' => $prompt1]]]],
-        ]);
-        $mbtiType = trim($response1->json('candidates.0.content.parts.0.text'));
+            // prompt and response 1
+            $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya (contohnya seperti INFJ-T, ESTP-A, dst.) tanpa penjelasan.";
+            $response1 = Http::post($api_url, [
+                'contents' => [['parts' => [['text' => $prompt1]]]],
+            ]);
+            $mbtiType = trim($response1->json('candidates.0.content.parts.0.text'));
+            
+            logger('API Response 1:', ['mbti_type' => $mbtiType]);
 
-        // prompt and response 2
-        $prompt2 = "Jelaskan secara singkat apa itu tipe MBTI {$mbtiType}, berikan juga julukannya (misalnya ISFP-T(Adventurer), INFJ-A(Advocate), dst). Langsung penjelasannya saja tanpa kata pengantar. Jangan bandingkan dengan tipe MBTI lainnya dan berikan penjelasan tentang kelebihannya saja dalam bentuk naratif paragraf";
-        $response2 = Http::post($api_url, [
-            'contents' => [['parts' => [['text' => $prompt2]]]],
-        ]);
-        $description = trim($response2->json('candidates.0.content.parts.0.text'));
+            // prompt and response 2
+            $prompt2 = "Jelaskan secara singkat apa itu tipe MBTI {$mbtiType}, berikan juga julukannya (misalnya ISFP-T(Adventurer), INFJ-A(Advocate), dst). Langsung penjelasannya saja tanpa kata pengantar. Jangan bandingkan dengan tipe MBTI lainnya dan berikan penjelasan tentang kelebihannya saja dalam bentuk naratif paragraf";
+            $response2 = Http::post($api_url, [
+                'contents' => [['parts' => [['text' => $prompt2]]]],
+            ]);
+            $description = trim($response2->json('candidates.0.content.parts.0.text'));
 
-        // prompt and response 3
-        $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, \n {$answersText} dan data yang saya miliki terutama pada pertanyaan nomor 9-15, berikan saran dan rekomendasi lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? (contohnya jika terdapat unsur olahraga, tidak menutup kemungkinan untuk menjadi atlet, dan untuk unsur yang lainnya pun begitu). Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
-        $response3 = Http::post($api_url, [
-            'contents' => [['parts' => [['text' => $prompt3]]]],
-        ]);
-        $recommendation = trim($response3->json('candidates.0.content.parts.0.text'));
+            // prompt and response 3
+            $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, \n {$answersText} dan data yang saya miliki terutama pada pertanyaan nomor 9-15, berikan saran dan rekomendasi lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? (contohnya jika terdapat unsur olahraga, tidak menutup kemungkinan untuk menjadi atlet, dan untuk unsur yang lainnya pun begitu). Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
+            $response3 = Http::post($api_url, [
+                'contents' => [['parts' => [['text' => $prompt3]]]],
+            ]);
+            $recommendation = trim($response3->json('candidates.0.content.parts.0.text'));
 
-        // prompt and response 4
-        $prompt4 = <<<PROMPT
+            // prompt and response 4
+            $prompt4 = <<<PROMPT
             Saya memiliki tipe MBTI {$mbtiType} dan telah mengisi jawaban sebagai berikut:
 
             {$answersText}
@@ -158,56 +171,84 @@ class TestController extends Controller
             Jangan gunakan huruf atau karakter lain selain angka dan tanda kurung siku.
             PROMPT;
 
-        $response4 = Http::post($api_url, [
-            'contents' => [['parts' => [['text' => $prompt4]]]],
-        ]);
-        $responseText = trim($response4->json('candidates.0.content.parts.0.text'));
+            $response4 = Http::post($api_url, [
+                'contents' => [['parts' => [['text' => $prompt4]]]],
+            ]);
+            $responseText = trim($response4->json('candidates.0.content.parts.0.text'));
 
-        if (strtolower($responseText) === 'null') {
-            $array_articles = [];
-        } else {
-            $array_articles = json_decode($responseText, true) ?? [];
+            if (strtolower($responseText) === 'null') {
+                $array_articles = [];
+            } else {
+                $array_articles = json_decode($responseText, true) ?? [];
+            }
+
+            if (empty($array_articles)) {
+                $recommended_articles = collect();
+            } else {
+                $recommended_articles = Article::whereIn('id', $array_articles)->get();
+            }
         }
-
-        if (empty($array_articles)) {
-            $recommended_articles = collect();
-        } else {
-            $recommended_articles = Article::whereIn('id', $array_articles)->get();
+        
+        // Pastikan variabel array_articles selalu ada
+        if (!isset($array_articles)) {
+            $array_articles = [];
         }
 
         $parsedown = new Parsedown;
         $descriptionHtml = $parsedown->text($description);
         $recommendationHtml = $parsedown->text($recommendation);
 
-        $user = User::where('id', Auth::user()->id)->first();
+        $user = User::find(Auth::user()->id);
 
-        logger([
-            'saving_articles' => $array_articles,
-            'encoded' => json_encode($array_articles),
+        logger('Saving MBTI data:', [
+            'user_id' => $user->id,
+            'mbti_type' => $mbtiType,
+            'description_length' => strlen($descriptionHtml),
+            'recommendation_length' => strlen($recommendationHtml),
+            'articles_count' => isset($array_articles) ? count($array_articles) : 0
         ]);
 
-        $user->update([
+        $updateData = [
             'mbti_type' => $mbtiType,
             'mbti_desc' => $descriptionHtml,
             'recommendation_career' => $recommendationHtml,
-            'recommended_articles' => json_encode($array_articles),
+            'recommended_articles' => json_encode(isset($array_articles) ? $array_articles : []),
+        ];
+        
+        $user->update($updateData);
+        
+        // Verify data was saved
+        $user->refresh();
+        logger('Data saved verification:', [
+            'saved_mbti_type' => $user->mbti_type,
+            'saved_desc_length' => strlen($user->mbti_desc ?? ''),
+            'saved_recommendation_length' => strlen($user->recommendation_career ?? '')
         ]);
 
         return redirect()->route('mbti_test.result')->with([
             'mbtiType' => $mbtiType,
             'description' => $descriptionHtml,
             'recommendation' => $recommendationHtml,
-            'recommendedArticles' => $recommended_articles,
+            'recommendedArticles' => isset($recommended_articles) ? $recommended_articles : collect(),
         ]);
     }
 
     public function result()
     {
-        $user = User::where('id', Auth::user()->id)->get();
-        $mbtiType = $user[0]->mbti_type;
-        $description = $user[0]->mbti_desc;
-        $recommendation = $user[0]->recommendation_career;
-        $recommendedArticlesIds = json_decode($user[0]->recommended_articles, true);
+        $user = User::find(Auth::user()->id);
+        
+        // Debug: Log user data
+        logger('User MBTI data:', [
+            'user_id' => $user->id,
+            'mbti_type' => $user->mbti_type,
+            'has_mbti_desc' => !empty($user->mbti_desc),
+            'has_recommendation' => !empty($user->recommendation_career)
+        ]);
+        
+        $mbtiType = $user->mbti_type;
+        $description = $user->mbti_desc;
+        $recommendation = $user->recommendation_career;
+        $recommendedArticlesIds = json_decode($user->recommended_articles, true);
 
         if (is_array($recommendedArticlesIds) && count($recommendedArticlesIds)) {
             $recommendedArticles = Article::whereIn('id', $recommendedArticlesIds)->get();

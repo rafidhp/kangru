@@ -35,12 +35,12 @@
     </style>
 </head>
 
-<body class="min-h-screen bg-gradient-to-r from-indigo-900 via-blue-900 to-blue-800 flex items-center justify-center">
+<body class="min-h-screen bg-gradient-to-r from-indigo-900 via-blue-900 to-blue-800 flex items-center justify-center p-4">
     <div
-        class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-2xl shadow-2xl p-6 md:p-10 wavy-bg relative my-12">
+        class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg bg-white rounded-2xl shadow-2xl p-6 md:p-10 wavy-bg relative my-4">
         <img src="{{ asset('assets/background.jpg') }}"
             alt="Smartphone laying flat on a blue gradient background showing a purple mascot cartoon character with text content and a button displayed on screen in a clean modern style"
-            class="fixed inset-0 bg-no-repeat bg-center bg-contain -z-10" onerror="this.style.display='none'" />
+            class="fixed inset-0 w-full h-full object-cover bg-no-repeat bg-center -z-10" onerror="this.style.display='none'" />
         <div class="relative z-10">
             <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-10 w-10 mx-auto mb-4" />
             <h1 class="text-center font-semibold text-2xl md:text-3xl mb-1 text-gray-900 leading-tight">
@@ -125,6 +125,13 @@
                 <span class="text-black font-semibold">Sudah punya akun? </span>
                 <a href="{{ route('auth.login') }}"
                     class="text-indigo-600 hover:text-indigo-700 font-semibold">Masuk</a>
+            </div>
+            <div class="mt-4 text-center">
+                <a href="{{ route('dashboard') }}"
+                    class="inline-flex items-center text-gray-600 hover:text-indigo-600 transition-colors duration-200">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    <span class="text-sm font-medium">Kembali</span>
+                </a>
             </div>
         </div>
     </div>
