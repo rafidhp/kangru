@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advertisement;
-use App\Models\Advertiser;
 use App\Models\Category;
 use App\Services\HashidsService;
 use Illuminate\Http\Request;
@@ -49,7 +48,7 @@ class AdvertisementController extends Controller
             'advertiser_id' => $advertiser_id,
         ]);
 
-        $image->storeAs('/public/advertisement/' . $hashids->encode($advertisement->id) . '_' . $image_name);
+        $image->storeAs('/public/advertisement/'.$hashids->encode($advertisement->id).'_'.$image_name);
 
         return redirect()->route('advertiser.index')->withSuccess('Advertisement successfully created!');
     }
@@ -94,7 +93,7 @@ class AdvertisementController extends Controller
                 'category_id' => $request->category_id,
             ]);
 
-            $image->storeAs('/public/advertisement/' . $hashids->encode($ad->id) . '_' . $image_name);
+            $image->storeAs('/public/advertisement/'.$hashids->encode($ad->id).'_'.$image_name);
         } else {
             $ad->update([
                 'title' => $request->title,
@@ -111,7 +110,7 @@ class AdvertisementController extends Controller
         $id = $hashids->decode($ad_id);
         $ad = Advertisement::findOrFail($id);
 
-        $image_path = 'advertisement/' . $ad_id . '_' . $ad->image;
+        $image_path = 'advertisement/'.$ad_id.'_'.$ad->image;
 
         if (Storage::disk('public')->exists($image_path)) {
             Storage::disk('public')->delete($image_path);

@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Advertisement;
-use App\Models\Advertiser;
 use Illuminate\Database\Seeder;
 
 class AdvertisementSeeder extends Seeder

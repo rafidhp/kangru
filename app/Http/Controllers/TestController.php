@@ -95,20 +95,20 @@ class TestController extends Controller
         foreach ($articles as $index => $article) {
             $category = $categoryMap[$article->category_id] ?? 'Tidak diketahui';
 
-            $articlesText .= ($index + 1) . ". ID: {$article->id}\n";
+            $articlesText .= ($index + 1).". ID: {$article->id}\n";
             $articlesText .= "   Judul: {$article->title}\n";
             $articlesText .= "   Kategori: {$category}\n";
-            $articlesText .= '   Isi: ' . Str::limit(strip_tags($article->content), 150) . "\n\n";
+            $articlesText .= '   Isi: '.Str::limit(strip_tags($article->content), 150)."\n\n";
         }
 
         $advertisementsText = '';
         foreach ($advertisements as $index => $advertisement) {
             $category = $categoryMap[$advertisement->category_id] ?? 'Tidak diketahui';
 
-            $advertisementsText .= ($index + 1) . ". ID: {$advertisement->id}\n";
+            $advertisementsText .= ($index + 1).". ID: {$advertisement->id}\n";
             $advertisementsText .= "   Judul: {$advertisement->title}\n";
             $advertisementsText .= "   Kategori: {$category}\n";
-            $advertisementsText .= '   Isi: ' . Str::limit(strip_tags($advertisement->description), 150) . "\n\n";
+            $advertisementsText .= '   Isi: '.Str::limit(strip_tags($advertisement->description), 150)."\n\n";
         }
 
         $answersText = '';
