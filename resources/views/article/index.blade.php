@@ -27,6 +27,20 @@
             max-width: 100%;
             height: auto;
         }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
     </style>
 </head>
 
@@ -168,275 +182,181 @@
     @endif
 
     <!-- Artikel Terbaru Section -->
-    <section class="max-w-6xl mx-auto px-4 py-12">
-        <div class="bg-white rounded-2xl shadow-lg p-8">
-            <div class="flex items-center mb-6">
-                <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm font-medium mr-4">Artikel
-                    Terbaru</span>
-                <h2 class="text-xl font-semibold">Bagaimana memilih Universitas yang tepat ?</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                    <img src="{{ asset('assets/article/artikel_terbaru.png') }}" alt="Article Image"
-                        class="w-full h-64 object-cover rounded-lg">
+    @if ($articles->count() > 0)
+        <section class="max-w-6xl mx-auto px-4 py-12">
+            @php $latestArticle = $articles->sortByDesc('upload_date')->first(); @endphp
+            <div class="bg-white rounded-2xl shadow-lg p-8">
+                <div class="flex items-center mb-6">
+                    <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-sm font-medium mr-4">Artikel
+                        Terbaru</span>
+                    <h2 class="text-xl font-semibold">{{ $latestArticle->title }}</h2>
                 </div>
-                <div>
-                    <p class="text-gray-600 mb-4 leading-relaxed">
-                        Memilih universitas adalah keputusan penting yang memerlukan pertimbangan matang. Artikel ini
-                        membahas faktor-faktor penting yang perlu dipertimbangkan seperti akreditasi, fasilitas, biaya
-                        kuliah, dan prospek karir lulusan.
-                    </p>
-                    <a href="#"
-                        class="inline-flex items-center text-indigo-600 hover:text-indigo-500 font-medium">
-                        Baca Lebih Lanjut
-                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
-                            </path>
-                        </svg>
-                    </a>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        @if ($latestArticle->image != null)
+                            <img src="{{ asset('storage/article/' . $latestArticle->hashid . '_' . $latestArticle->image) }}"
+                                alt="{{ $latestArticle->title }}" class="w-full h-64 object-cover rounded-lg">
+                        @else
+                            <img src="{{ asset('storage/article/article_template.jpg') }}"
+                                alt="{{ $latestArticle->title }}" class="w-full h-64 object-cover rounded-lg">
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            {{ Str::limit($latestArticle->content, 200) }}
+                        </p>
+                        <a href="{{ route('article.show', $latestArticle->hashid) }}"
+                            class="inline-flex items-center text-indigo-600 hover:text-indigo-500 font-medium">
+                            Baca Lebih Lanjut
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
     <!-- Bekerja Section -->
-    <section id="bekerja" class="max-w-6xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold mb-8">Bekerja</h2>
-        <p class="text-gray-600 mb-8">Tetap Terinformasi dengan Wawasan Terbaru Kami</p>
-        <div class="grid md:grid-cols-4 gap-6">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_bekerja1.png') }}"
-                    alt="Tips Pelaporan Jasa Keterampilan Digital dan Prestasi Usaha"
-                    class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Tips Pelaporan Jasa Keterampilan Digital dan Prestasi Usaha
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-3">Dalam era digital saat ini, banyak peluang untuk
-                        mengembangkan keterampilan digital dan membangun prestasi usaha...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_bekerja2.png') }}"
-                    alt="Tips Sukses Negosiasi Gaji untuk Fresh Graduate" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Tips Sukses Negosiasi Gaji untuk Fresh Graduate</h3>
-                    <p class="text-gray-600 text-sm mb-3">Negosiasi gaji merupakan skill penting yang harus dikuasai
-                        oleh fresh graduate...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_bekerja3.png') }}"
-                    alt="Industri Kreatif Peluang Besar bagi Generasi Milenial" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Industri Kreatif Peluang Besar bagi Generasi Milenial</h3>
-                    <p class="text-gray-600 text-sm mb-3">Industri kreatif menawarkan peluang besar bagi generasi
-                        milenial untuk mengembangkan karir...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_bekerja4.png') }}"
-                    alt="Pelatihan Hybrid Solusi Baru bagi Karyawan Masa Kini Hidup" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Pelatihan Hybrid Solusi Baru bagi Karyawan Masa Kini Hidup
-                    </h3>
-                    <p class="text-gray-600 text-sm mb-3">Pelatihan hybrid menjadi solusi inovatif untuk pengembangan
-                        karyawan di era modern...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Melanjutkan Studi Section -->
-    <section id="study" class="max-w-6xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold mb-8">Melanjutkan Studi</h2>
-        <p class="text-gray-600 mb-8">Tetap Terinformasi dengan Wawasan Terbaru Kami</p>
-        <div class="grid md:grid-cols-4 gap-6">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_studi1.png') }}"
-                    alt="Bagaimana Memilih Jurusan Wajib di Universitas" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Bagaimana Memilih Jurusan Wajib di Universitas</h3>
-                    <p class="text-gray-600 text-sm mb-3">Memilih jurusan yang tepat adalah keputusan penting dalam
-                        hidup. Artikel ini memberikan panduan lengkap...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_studi2.png') }}"
-                    alt="Mengenal Teknologi Curriculum & Assessment" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Mengenal Teknologi Curriculum & Assessment</h3>
-                    <p class="text-gray-600 text-sm mb-3">Teknologi dalam pendidikan terus berkembang. Pelajari
-                        bagaimana curriculum dan assessment modern...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_studi3.png') }}"
-                    alt="S-2 Cara Menyiapkan Passion untuk Akademik" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">S-2 Cara Menyiapkan Passion untuk Akademik</h3>
-                    <p class="text-gray-600 text-sm mb-3">Melanjutkan studi S-2 membutuhkan persiapan yang matang.
-                        Temukan cara untuk menyiapkan passion...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_studi4.png') }}" alt="Kuliah Masuk Kuliah di UGM"
-                    class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Kuliah Masuk Kuliah di UGM</h3>
-                    <p class="text-gray-600 text-sm mb-3">UGM merupakan salah satu universitas terbaik di Indonesia.
-                        Pelajari tips dan strategi untuk bisa diterima...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wirausaha Section -->
-    <section id="wirausaha" class="max-w-6xl mx-auto px-4 py-12">
-        <h2 class="text-2xl font-bold mb-8">Wirausaha</h2>
-        <p class="text-gray-600 mb-8">Tetap Terinformasi dengan Wawasan Terbaru Kami</p>
-        <div class="grid md:grid-cols-4 gap-6">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_wirausaha1.png') }}"
-                    alt="Strategi Pemasaran Digital untuk UMKM" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Strategi Pemasaran Digital untuk UMKM</h3>
-                    <p class="text-gray-600 text-sm mb-3">Pemasaran digital menjadi kunci sukses UMKM di era modern.
-                        Pelajari strategi-strategi efektif...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_wirausaha2.png') }}"
-                    alt="Mengelola Pemerintahan Crowdfunding untuk Startup" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Mengelola Pemerintahan Crowdfunding untuk Startup</h3>
-                    <p class="text-gray-600 text-sm mb-3">Crowdfunding menjadi alternatif pendanaan yang populer untuk
-                        startup. Pelajari cara mengelola kampanye...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_wirausaha3.png') }}"
-                    alt="5 Kesalahan Umum yang Harus Dihindari" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">5 Kesalahan Umum yang Harus Dihindari</h3>
-                    <p class="text-gray-600 text-sm mb-3">Dalam memulai bisnis, ada beberapa kesalahan umum yang sering
-                        dilakukan entrepreneur pemula...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="{{ asset('assets/article/artikel_wirausaha4.png') }}"
-                    alt="Pentingnya Branding bagi Bisnis Kecil" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-lg mb-2">Pentingnya Branding bagi Bisnis Kecil</h3>
-                    <p class="text-gray-600 text-sm mb-3">Branding bukan hanya untuk perusahaan besar. Bisnis kecil
-                        juga membutuhkan branding yang kuat...</p>
-                    <div class="flex justify-between items-center">
-                        <a href="#" class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
-                            Selengkapnya</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="bg-indigo-50 py-16">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="flex items-center mb-8">
-                <img src="{{ asset('assets/article/pertanyaan_artikel.png') }}" alt="FAQ Image"
-                    class="w-32 h-32 object-cover rounded-lg mr-8">
-                <div>
-                    <h2 class="text-2xl font-bold mb-4">Pertanyaan yang Sering Diajukan</h2>
-                </div>
-            </div>
-            <div class="space-y-4" x-data="{ openIndex: null }">
-                @php
-                    $faqs = [
-                        [
-                            'question' => 'Apa itu Kangru?',
-                            'answer' => 'Kangru adalah platform bimbingan karir berbasis AI dan MBTI.',
-                        ],
-                        [
-                            'question' => 'Apakah Kangru gratis digunakan?',
-                            'answer' => 'Tersedia versi gratis dan premium sesuai kebutuhanmu.',
-                        ],
-                        [
-                            'question' => 'Apakah data saya aman di Kangru?',
-                            'answer' => 'Data Anda dijaga kerahasiaannya dengan standar keamanan tinggi.',
-                        ],
-                        [
-                            'question' => 'Bagaimana saya memulai menggunakan Kangru?',
-                            'answer' => 'Daftar akun dan mulai jelajahi fitur bimbingan karir kami.',
-                        ],
-                        [
-                            'question' => 'Bagaimana saya Kangru membantu saya menentukan karir?',
-                            'answer' =>
-                                'Kangru memberikan rekomendasi karir yang dipersonalisasi berdasarkan analisis kepribadian dan minat Anda.',
-                        ],
-                        [
-                            'question' => 'Apakah Kangru hanya untuk karir tertentu saja?',
-                            'answer' =>
-                                'Kangru cocok untuk berbagai jalur karir, baik bekerja, studi, maupun wirausaha.',
-                        ],
-                    ];
-                @endphp
-                @foreach ($faqs as $index => $faq)
-                    <div class="border rounded-lg p-4 cursor-pointer bg-white hover:shadow-lg transition-shadow"
-                        @click="openIndex === {{ $index }} ? openIndex = null : openIndex = {{ $index }}">
-                        <div class="flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-800">{{ $faq['question'] }}</h3>
-                            <button class="text-indigo-600 font-bold text-xl focus:outline-none"
-                                x-text="openIndex === {{ $index }} ? '-' : '+'"></button>
+    @if ($bekerja_articles->count() > 0)
+        <section id="bekerja" class="max-w-6xl mx-auto px-4 py-12">
+            <h2 class="text-2xl font-bold mb-8">Bekerja</h2>
+            <p class="text-gray-600 mb-8">Tetap Terinformasi dengan Wawasan Terbaru Kami</p>
+            <div class="grid md:grid-cols-4 gap-6">
+                @foreach ($bekerja_articles->take(4) as $article)
+                    <a href="{{ route('article.show', $article->hashid) }}" class="block">
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                            @if ($article->image != null)
+                                <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
+                                    alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                            @else
+                                <img src="{{ asset('storage/article/article_template.jpg') }}"
+                                    alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                            @endif
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2 line-clamp-2">{{ $article->title }}</h3>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-3">
+                                    {{ Str::limit($article->content, 100) }}</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
+                                        Selengkapnya</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-2 text-gray-600" x-show="openIndex === {{ $index }}" x-transition>
-                            {{ $faq['answer'] }}
-                        </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
+        </section>
+    @endif
+
+    <!-- Melanjutkan Studi Section -->
+    @if ($kuliah_articles->count() > 0)
+        <section id="study" class="max-w-6xl mx-auto px-4 py-12">
+            <h2 class="text-2xl font-bold mb-8">Melanjutkan Studi</h2>
+            <p class="text-gray-600 mb-8">Tetap Terinformasi dengan Wawasan Terbaru Kami</p>
+            <div class="grid md:grid-cols-4 gap-6">
+                @foreach ($kuliah_articles->take(4) as $article)
+                    <a href="{{ route('article.show', $article->hashid) }}" class="block">
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                            @if ($article->image != null)
+                                <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
+                                    alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                            @else
+                                <img src="{{ asset('storage/article/article_template.jpg') }}"
+                                    alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                            @endif
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2 line-clamp-2">{{ $article->title }}</h3>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-3">
+                                    {{ Str::limit($article->content, 100) }}</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
+                                        Selengkapnya</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    <!-- Wirausaha Section -->
+    @if ($wirausaha_articles->count() > 0)
+        <section id="wirausaha" class="max-w-6xl mx-auto px-4 py-12">
+            <h2 class="text-2xl font-bold mb-8">Wirausaha</h2>
+            <p class="text-gray-600 mb-8">Tetap Terinformasi dengan Wawasan Terbaru Kami</p>
+            <div class="grid md:grid-cols-4 gap-6">
+                @foreach ($wirausaha_articles->take(4) as $article)
+                    <a href="{{ route('article.show', $article->hashid) }}" class="block">
+                        <div
+                            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+                            @if ($article->image != null)
+                                <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
+                                    alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                            @else
+                                <img src="{{ asset('storage/article/article_template.jpg') }}"
+                                    alt="{{ $article->title }}" class="w-full h-48 object-cover">
+                            @endif
+                            <div class="p-4">
+                                <h3 class="font-semibold text-lg mb-2 line-clamp-2">{{ $article->title }}</h3>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-3">
+                                    {{ Str::limit($article->content, 100) }}</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-indigo-600 hover:text-indigo-500 text-sm font-medium">Baca
+                                        Selengkapnya</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    @if ($articles->count() == 0)
+        <section class="max-w-6xl mx-auto px-4 py-12">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-4">Belum Ada Artikel</h2>
+                <p class="text-gray-600">Artikel akan segera hadir. Silakan kembali lagi nanti.</p>
+            </div>
+        </section>
+    @endif
+
+
+
+    <!-- FAQ Section -->
+    <section id="faq" class="max-w-4xl mx-auto py-12 md:py-16 px-4" x-data="{ openIndex: null }">
+        <h2 class="text-center text-xl md:text-2xl font-semibold mb-6 md:mb-8">Pertanyaan yang Sering Diajukan</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <template
+                x-for="(faq, index) in [
+                { question: 'Apa itu Kangru?', answer: 'Kangru adalah platform bimbingan karir berbasis AI dan MBTI.' },
+                { question: 'Apakah Kangru gratis digunakan?', answer: 'Tersedia versi gratis dan premium sesuai kebutuhanmu.' },
+                { question: 'Apakah data saya aman di Kangru?', answer: 'Data Anda dijaga kerahasiaannya dengan standar keamanan tinggi.' },
+                { question: 'Bagaimana saya memulai menggunakan Kangru?', answer: 'Daftar akun dan mulai jelajahi fitur bimbingan karir kami.' },
+                { question: 'Bagaimana Kangru membantu saya menentukan karir?', answer: 'Kangru memberikan rekomendasi karir yang dipersonalisasi berdasarkan analisis kepribadian dan minat Anda.' },
+                { question: 'Apakah Kangru hanya untuk karir tertentu saja?', answer: 'Kangru cocok untuk berbagai jalur karir, baik bekerja, studi, maupun wirausaha.' }
+            ]"
+                :key="index">
+                <div class="border rounded-lg p-4 cursor-pointer select-none hover:shadow-lg transition-shadow duration-300"
+                    @click="openIndex === index ? openIndex = null : openIndex = index">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-semibold text-gray-800" x-text="faq.question"></h3>
+                        <button class="text-indigo-600 font-bold text-xl leading-none focus:outline-none"
+                            :aria-expanded="openIndex === index" :aria-controls="'faq-answer-' + index" type="button"
+                            @click.stop="openIndex === index ? openIndex = null : openIndex = index"
+                            x-text="openIndex === index ? '-' : '+'"></button>
+                    </div>
+                    <div class="mt-2 text-gray-600" x-show="openIndex === index" x-transition
+                        x-bind:id="'faq-answer-' + index" x-cloak x-text="faq.answer"></div>
+                </div>
+            </template>
         </div>
     </section>
 
@@ -457,6 +377,7 @@
                         <li><a href="{{ url('/') }}" class="hover:text-indigo-600">Beranda</a></li>
                         <li><a href="{{ route('article.index') }}" class="hover:text-indigo-600">Artikel</a></li>
                         <li><a href="{{ route('mbti_test') }}" class="hover:text-indigo-600">Tes Minat Bakat</a></li>
+                        <li><a href="#faq" class="hover:text-indigo-600">FAQ</a></li>
                     </ul>
                 </div>
                 <div>

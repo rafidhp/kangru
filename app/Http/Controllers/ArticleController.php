@@ -14,8 +14,11 @@ class ArticleController extends Controller
     public function index(HashidsService $hashids)
     {
         $articles = Article::all();
+        $bekerja_articles = Article::where('category_id', 2)->get();
+        $wirausaha_articles = Article::where('category_id', 3)->get();
+        $kuliah_articles = Article::where('category_id', 1)->get();
 
-        return view('article.index', compact('articles'));
+        return view('article.index', compact('articles', 'bekerja_articles', 'wirausaha_articles', 'kuliah_articles'));
     }
 
     public function create()

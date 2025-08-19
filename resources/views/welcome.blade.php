@@ -360,7 +360,8 @@
     </section>
 
     <!-- Advertiser Unggulan Section -->
-    <section class="max-w-6xl mx-auto px-4 py-12 md:py-20">
+    @if (!Auth::check())
+            <section class="max-w-6xl mx-auto px-4 py-12 md:py-20">
         <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
             <!-- Kiri: Teks -->
             <div class="md:w-1/2 text-center md:text-left">
@@ -386,6 +387,7 @@
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Mentor -->
     <section class="max-w-6xl mx-auto py-12 md:py-16 px-4">
