@@ -37,8 +37,13 @@
                                         {{ $article->title }}
                                     </span>
                                     <br>
-                                    <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
-                                        alt="article image" style="width: 150px">
+                                    @if ($article->image != null)
+                                        <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
+                                            alt="article image" style="width: 150px">
+                                    @else
+                                        <img src="{{ asset('storage/article/article_template.jpg') }}"
+                                            alt="article image" style="width: 150px">
+                                    @endif
                                     <p class="text-sm text-gray-600">{{ Str::limit($article->content ?? '', 100) }}</p>
                                 </li>
                             </a>
