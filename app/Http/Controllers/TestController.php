@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertisement;
 use App\Models\Article;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -80,6 +81,7 @@ class TestController extends Controller
         ];
 
         $articles = Article::all();
+        $advertisements = Advertisement::all();
         $categoryMap = [
             1 => 'Kuliah',
             2 => 'Kerja',
@@ -97,6 +99,16 @@ class TestController extends Controller
             $articlesText .= "   Judul: {$article->title}\n";
             $articlesText .= "   Kategori: {$category}\n";
             $articlesText .= '   Isi: ' . Str::limit(strip_tags($article->content), 150) . "\n\n";
+        }
+
+        $advertisementsText = '';
+        foreach ($advertisements as $index => $advertisement) {
+            $category = $categoryMap[$advertisement->category_id] ?? 'Tidak diketahui';
+
+            $advertisementsText .= ($index + 1) . ". ID: {$advertisement->id}\n";
+            $advertisementsText .= "   Judul: {$advertisement->title}\n";
+            $advertisementsText .= "   Kategori: {$category}\n";
+            $advertisementsText .= '   Isi: ' . Str::limit(strip_tags($advertisement->description), 150) . "\n\n";
         }
 
         $answersText = '';
@@ -117,7 +129,7 @@ class TestController extends Controller
         $api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey";
 
         // prompt and response 1
-        $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya (contohnya seperti INFJ-T, ESTP-A, dst.) tanpa penjelasan. Meskipun tidak mungkin menentukan informasi MBTI hanya dengan informasi yang diberikan.";
+        $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya (contohnya seperti INFJ-T, ESTP-A, dst.) tanpa penjelasan. Meskipun tidak mungkin menentukan informasi MBTI hanya dengan informasi yang diberikan. Jika tetap tidak ditemuka berikan saja jawaban INTJ-T sebagai template, tetapi 'JIKA TIDAK DITEMUKAN JAWABANNYA SAJA'";
         $response1 = Http::post($api_url, [
             'contents' => [['parts' => [['text' => $prompt1]]]],
         ]);
@@ -175,6 +187,43 @@ class TestController extends Controller
             $recommended_articles = Article::whereIn('id', $array_articles)->get();
         }
 
+        $prompt5 = <<<PROMPT
+            Saya memiliki tipe MBTI {$mbtiType} dan telah mengisi jawaban sebagai berikut:
+
+            {$answersText}
+
+            Saya juga memiliki beberapa referensi iklan lowongan pekerjaan berikut:
+
+            {$advertisementsText}
+
+            Berdasarkan tipe MBTI saya, jawaban saya, dan referensi iklan tersebut, tolong berikan saya rekomendasi iklan (advertisement) yang sesuai untuk saya. Rekomendasi bisa didasarkan pada:
+            1. Kategori iklan (lebih utama)
+            2. Isi iklan (jika kategori kurang relevan)
+            3. Judul iklan (jika isi juga tidak membantu)
+
+            Saya hanya membutuhkan **maksimal 3 iklan saja** (boleh kurang dari 3 jika data tidak cukup, atau jika tidak ada yang relevan kembalikan "null" saja). Kembalikan hanya ID-nya dalam bentuk array tanpa penjelasan lain. Contoh format:
+            [2, 5, 9]
+
+            Jangan gunakan huruf atau karakter lain selain angka dan tanda kurung siku.
+            PROMPT;
+
+        $response5 = Http::post($api_url, [
+            'contents' => [['parts' => [['text' => $prompt5]]]],
+        ]);
+        $responseTextAd = trim($response5->json('candidates.0.content.parts.0.text'));
+
+        if (strtolower($responseTextAd) === 'null') {
+            $array_ads = [];
+        } else {
+            $array_ads = json_decode($responseTextAd, true) ?? [];
+        }
+
+        if (empty($array_ads)) {
+            $recommended_ads = collect();
+        } else {
+            $recommended_ads = Advertisement::whereIn('id', $array_ads)->get();
+        }
+
         $parsedown = new Parsedown;
         $descriptionHtml = $parsedown->text($description);
         $recommendationHtml = $parsedown->text($recommendation);
@@ -186,6 +235,7 @@ class TestController extends Controller
             'mbti_desc' => $descriptionHtml,
             'recommendation_career' => $recommendationHtml,
             'recommended_articles' => json_encode($array_articles),
+            'recommended_ads' => json_encode($array_ads),
         ]);
 
         return redirect()->route('mbti_test.result')->with([
@@ -193,6 +243,7 @@ class TestController extends Controller
             'description' => $descriptionHtml,
             'recommendation' => $recommendationHtml,
             'recommendedArticles' => $recommended_articles,
+            'recommendedAds' => $recommended_ads,
         ]);
     }
 

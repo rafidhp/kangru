@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('mbti_desc')->nullable();
             $table->text('recommendation_career')->nullable();
             $table->json('recommended_articles')->nullable();
+            $table->json('recommended_ads')->nullable();
             $table->string('role');
             $table->rememberToken();
             $table->timestamps();

@@ -26,6 +26,7 @@
             <h2 class="text-2xl font-semibold mt-10">Rekomendasi:</h2>
             <div class="mt-2 leading-relaxed text-gray-800">{!! $recommendation ?? 'Rekomendasi akan ditampilkan di sini.' !!}</div>
 
+            {{ dd($recommendedAds) }}
             <h2 class="text-2xl font-semibold mt-10">Rekomendasi Artikel:</h2>
             <div class="mt-2 leading-relaxed text-gray-800">
                 @if (isset($recommendedArticles) && $recommendedArticles->count() > 0)
