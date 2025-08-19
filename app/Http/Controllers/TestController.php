@@ -93,10 +93,10 @@ class TestController extends Controller
         foreach ($articles as $index => $article) {
             $category = $categoryMap[$article->category_id] ?? 'Tidak diketahui';
 
-            $articlesText .= ($index + 1).". ID: {$article->id}\n";
+            $articlesText .= ($index + 1) . ". ID: {$article->id}\n";
             $articlesText .= "   Judul: {$article->title}\n";
             $articlesText .= "   Kategori: {$category}\n";
-            $articlesText .= '   Isi: '.Str::limit(strip_tags($article->content), 150)."\n\n";
+            $articlesText .= '   Isi: ' . Str::limit(strip_tags($article->content), 150) . "\n\n";
         }
 
         $answersText = '';
@@ -124,7 +124,7 @@ class TestController extends Controller
         $mbtiType = trim($response1->json('candidates.0.content.parts.0.text'));
 
         // prompt and response 2
-        $prompt2 = "Jelaskan secara singkat apa itu tipe MBTI {$mbtiType}, berikan juga julukannya (misalnya ISFP-T(Adventurer), INFJ-A(Advocate), dst). Langsung penjelasannya saja tanpa kata pengantar. Jangan bandingkan dengan tipe MBTI lainnya dan berikan penjelasan tentang kelebihannya saja dalam bentuk naratif paragraf";
+        $prompt2 = "Jelaskan secara singkat apa itu tipe MBTI {$mbtiType}, berikan juga julukannya dan diberi BOLD pada julukannya (misalnya ISFP-T(Adventurer), INFJ-A(Advocate), dst). Langsung penjelasannya saja tanpa kata pengantar. Jangan bandingkan dengan tipe MBTI lainnya dan berikan penjelasan tentang kelebihannya saja dalam bentuk naratif paragraf";
         $response2 = Http::post($api_url, [
             'contents' => [['parts' => [['text' => $prompt2]]]],
         ]);
@@ -180,11 +180,6 @@ class TestController extends Controller
         $recommendationHtml = $parsedown->text($recommendation);
 
         $user = User::where('id', Auth::user()->id)->first();
-
-        logger([
-            'saving_articles' => $array_articles,
-            'encoded' => json_encode($array_articles),
-        ]);
 
         $user->update([
             'mbti_type' => $mbtiType,

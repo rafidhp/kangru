@@ -145,16 +145,35 @@
                 </button>
             </form>
             <div class="mt-6 text-center">
-                <span class="text-black font-semibold">Sudah punya akun? </span>
-                <a href="{{ route('auth.login') }}"
-                    class="text-indigo-600 hover:text-indigo-700 font-semibold">Masuk</a>
+                <p class="text-sm text-gray-600">
+                    Sudah punya akun?
+                    <a href="{{ route('auth.login') }}" class="text-indigo-600 hover:text-indigo-500 font-medium">
+                        Login di sini
+                    </a>
+                </p>
             </div>
         </div>
     </div>
-    </div>
-</body>
 
+    <script>
+        function togglePasswordVisibility(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
 </html>
+
 <script>
     function togglePasswordVisibility(inputId, iconId) {
         const pwdInput = document.getElementById(inputId);

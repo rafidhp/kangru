@@ -8,48 +8,136 @@
     <link rel="shortcut icon" href="{{ asset('assets/logo.png') }}" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        /* Responsive font scaling */
+        html {
+            font-size: 14px;
+        }
+        @media (min-width: 640px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+        /* Prevent horizontal overflow */
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Responsive images */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Responsive grid gaps */
+        .responsive-grid {
+            gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .responsive-grid {
+                gap: 2rem;
+            }
+        }
+
+        /* Responsive padding */
+        .responsive-padding {
+            padding: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .responsive-padding {
+                padding: 3rem;
+            }
+        }
+
+        /* Responsive text */
+        .responsive-text {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+        @media (min-width: 768px) {
+            .responsive-text {
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+        }
+
+        /* Responsive buttons */
+        .responsive-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+        }
+        @media (min-width: 768px) {
+            .responsive-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body class="text-gray-800">
     <!-- Navbar -->
     <header x-data="{ open: false }"
-        class="flex justify-between items-center px-6 md:px-12 py-4 border border-[#b3b3b3] rounded-b-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
+        class="flex justify-between items-center px-4 md:px-12 py-4 border border-[#b3b3b3] rounded-b-lg bg-white/60 backdrop-blur-md fixed top-0 left-0 w-full z-50">
         <a href="{{ route('dashboard') }}">
             <div class="flex items-center space-x-2">
                 <img src="{{ asset('assets/logo.png') }}" alt="Logo" class="h-8">
-                <span class="font-semibold">Kangru</span>
+                <span class="font-semibold text-sm md:text-base">Kangru</span>
             </div>
         </a>
+
+        <!-- Mobile menu button -->
+        <button @click="open = !open" class="md:hidden p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
         <nav :class="{ 'block': open, 'hidden': !open }"
-            class="absolute top-full left-0 w-full bg-white/90 backdrop-blur-md md:static md:block md:w-auto md:bg-transparent md:backdrop-blur-0 md:flex md:space-x-6">
+            class="absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg md:static md:block md:w-auto md:bg-transparent md:backdrop-blur-0 md:flex md:space-x-6 md:shadow-none">
+            <div class="flex flex-col md:flex-row md:space-x-6 p-4 md:p-0 space-y-4 md:space-y-0">
+                <a href="{{ url('/') }}"
+                    class="flex flex-col items-center text-sm md:text-base transition {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }} py-2 md:py-0">
+                    Beranda
+                    @if (request()->is('/'))
+                        <span class="block w-6 h-1 bg-indigo-600 rounded-full mt-1"></span>
+                    @endif
+                </a>
 
-            <a href="{{ url('/') }}"
-                class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('/') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
-                Beranda
-                @if (request()->is('/'))
-                    <span class="block w-6 h-1 bg-indigo-600 rounded-full"></span>
-                @endif
-            </a>
+                <a href="{{ url('/article') }}"
+                    class="flex flex-col items-center text-sm md:text-base transition {{ request()->is('article') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }} py-2 md:py-0">
+                    Artikel
+                    @if (request()->is('article'))
+                        <span class="block w-6 h-1 bg-indigo-600 rounded-full mt-1"></span>
+                    @endif
+                </a>
 
-            <a href="{{ url('/article') }}"
-                class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('article') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
-                Artikel
-                @if (request()->is('article'))
-                    <span class="block w-6 h-1 bg-indigo-600 rounded-full"></span>
-                @endif
-            </a>
+                <a href="{{ url('/mbti-test') }}"
+                    class="flex flex-col items-center text-sm md:text-base transition {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }} py-2 md:py-0">
+                    Tes Kepribadian
+                    @if (request()->is('tes-kepribadian'))
+                        <span class="block w-6 h-1 bg-indigo-600 rounded-full mt-1"></span>
+                    @endif
+                </a>
 
-            <a href="{{ url('/mbti-test') }}"
-                class="inline-flex flex-col items-center text-sm md:text-base transition {{ request()->is('tes-kepribadian') ? 'text-indigo-600 font-semibold' : 'hover:text-indigo-600' }}">
-                Tes Kepribadian
-                @if (request()->is('tes-kepribadian'))
-                    <span class="block w-6 h-1 bg-indigo-600 rounded-full"></span>
+                @if (Auth::check())
+                    <a href="{{ route('auth.logout') }}"
+                        class="md:hidden bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg text-center text-sm font-medium transition">
+                        Logout
+                    </a>
+                @else
+                    <a href="{{ url('/login') }}"
+                        class="md:hidden bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-2 rounded-lg text-center text-sm font-medium transition">
+                        Masuk
+                    </a>
                 @endif
-            </a>
+            </div>
         </nav>
 
         @if (Auth::check())
-            <div x-data="{ openProfile: false }" class="relative block px-4 py-2 md:flex md:flex-col md:items-center">
+            <div x-data="{ openProfile: false }" class="relative hidden md:block px-4 py-2 md:flex md:flex-col md:items-center">
                 <button @click="openProfile = !openProfile"
                     class="text-indigo-600 font-semibold hover:text-indigo-500 transition duration-200 focus:outline-none">
                     {{ Auth::user()->name }}
@@ -64,7 +152,7 @@
             </div>
         @else
             <a href="{{ url('/login') }}"
-                class="block px-4 py-2 md:flex md:flex-col md:items-center bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg mb-0 transition-transform duration-200 hover:scale-105 text-center">
+                class="hidden md:block px-4 py-2 md:flex md:flex-col md:items-center bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg mb-0 transition-transform duration-200 hover:scale-105 text-center text-sm">
                 Masuk
             </a>
         @endif
@@ -72,46 +160,45 @@
     <div class="h-20 md:h-20"></div>
 
     <!-- Hero -->
-    <section class="relative py-12 md:py-20 bg-gradient-to-b from-white to-indigo-50">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-center gap-8">
+    <section class="relative py-8 md:py-20 bg-gradient-to-b from-white to-indigo-50">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-start justify-center gap-6 md:gap-8">
             <!-- Kiri: Keterangan & Tombol -->
-            <div
-                class="flex-1 flex flex-col items-start md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 text-left md:text-left">
+            <div class="flex-1 flex flex-col items-center md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2 text-center md:text-left">
+                <h1 class="text-2xl md:text-4xl font-bold mb-4 leading-tight">
                     Mulailah Perjalanan Karir Anda bersama <span class="text-indigo-600">Kangru</span>
                 </h1>
-                <p class="max-w-md mb-6 text-gray-600 text-left">
+                <p class="max-w-md mb-6 text-gray-600 text-sm md:text-base leading-relaxed">
                     Dapatkan bimbingan karir berbasis AI yang dipersonalisasi, analisis kepribadian MBTI, dan mentoring
                     profesional untuk sukses di jalur Bekerja, Melanjutkan Studi, atau Wirausaha.
                 </p>
                 @if (Auth::check())
                     <a href="{{ url('/mbti-test') }}"
-                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">
+                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg transition-transform duration-200 hover:scale-105 text-sm md:text-base font-medium">
                         Mulai Sekarang!
                     </a>
                 @else
                     <a href="{{ url('/login') }}"
-                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg mb-0 transition-transform duration-200 hover:scale-105">
+                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg transition-transform duration-200 hover:scale-105 text-sm md:text-base font-medium">
                         Mulai Sekarang!
                     </a>
                 @endif
             </div>
             <!-- Tengah: Asset HP -->
             <div class="flex-1 flex flex-col items-center order-1 md:order-2 w-full md:w-1/2">
-                <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-80 md:w-[32rem] mb-6">
+                <img src="{{ asset('assets/mockup.png') }}" alt="Mockup" class="w-64 md:w-[32rem] mb-4 md:mb-6">
                 <!-- Logo Integrasi -->
-                <div class="flex flex-wrap justify-center items-center gap-12 mt-2">
-                    <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/linkedin.png') }}" class="h-20 w-20 object-contain" alt="LinkedIn">
+                <div class="flex flex-wrap justify-center items-center gap-4 md:gap-12 mt-2">
+                    <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="LinkedIn">
                     </div>
-                    <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/discord.png') }}" class="h-20 w-20 object-contain" alt="Discord">
+                    <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="Discord">
                     </div>
-                    <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/zoom.png') }}" class="h-20 w-20 object-contain" alt="Zoom">
+                    <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="Zoom">
                     </div>
-                    <div class="flex items-center justify-center h-20 w-20">
-                        <img src="{{ asset('assets/meet.png') }}" class="h-20 w-20 object-contain" alt="Google Meet">
+                    <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="Google Meet">
                     </div>
                 </div>
             </div>
@@ -123,116 +210,116 @@
     </section>
 
     <!-- Kenali Potensimu -->
-    <section class="max-w-6xl mx-auto px-4 md:px-0 py-20 grid md:grid-cols-2 gap-12 items-center">
-        <div>
-            <h2 class="text-3xl font-bold mb-4 text-indigo-700">Kenali Potensimu, Wujudkan Mimpimu!</h2>
-            <p class="mb-6 text-gray-600 text-lg leading-relaxed">
-                Lebih dari sekadar aplikasi karir. Dengan AI dan MBTI, Kangru memberikan rekomendasi rencana pribadi
-                sesuai minat, bakat, dan impianmu: Bekerja, Studi, atau Wirausaha.
-            </p>
-            <ul class="space-y-2 text-gray-700">
-                <li class="flex items-center">
-                    <span class="inline-block w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
-                    Rekomendasi jalur karir berbasis minat & kepribadian
-                </li>
-                <li class="flex items-center">
-                    <span class="inline-block w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
-                    Analisis MBTI untuk pengembangan diri
-                </li>
-                <li class="flex items-center">
-                    <span class="inline-block w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
-                    Materi bimbingan karir lengkap
-                </li>
-            </ul>
-        </div>
-        <div class="bg-white/80 shadow-xl rounded-2xl p-8 flex flex-col items-center">
-            <h3 class="font-semibold text-lg mb-3 text-indigo-600">Integrasi Platform</h3>
-            <p class="mb-6 text-gray-500 text-center">Kangru terhubung dengan aplikasi populer untuk mendukung
-                perjalanan karirmu.</p>
-            <div class="flex gap-6 justify-center">
-                <div class="bg-gray-50 rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                    <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 object-contain" alt="LinkedIn">
-                </div>
-                <div class="bg-gray-50 rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                    <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 object-contain" alt="Discord">
-                </div>
-                <div class="bg-gray-50 rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                    <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 object-contain" alt="Zoom">
-                </div>
-                <div class="bg-gray-50 rounded-xl shadow p-3 flex items-center justify-center h-20 w-20">
-                    <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 object-contain" alt="Google Meet">
+    <section class="max-w-6xl mx-auto px-4 py-12 md:py-20">
+        <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-8 md:mb-12">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-indigo-700 text-center md:text-left">Kenali Potensimu, Wujudkan Mimpimu!</h2>
+                <p class="mb-6 text-gray-600 text-sm md:text-lg leading-relaxed text-center md:text-left">
+                    Lebih dari sekadar aplikasi karir. Dengan AI dan MBTI, Kangru memberikan rekomendasi rencana pribadi
+                    sesuai minat, bakat, dan impianmu: Bekerja, Studi, atau Wirausaha.
+                </p>
+                <ul class="space-y-2 text-gray-700 text-sm md:text-base">
+                    <li class="flex items-center justify-center md:justify-start">
+                        <span class="inline-block w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                        Rekomendasi jalur karir berbasis minat & kepribadian
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start">
+                        <span class="inline-block w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                        Analisis MBTI untuk pengembangan diri
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start">
+                        <span class="inline-block w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                        Materi bimbingan karir lengkap
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-white/80 shadow-xl rounded-2xl p-6 md:p-8 flex flex-col items-center">
+                <h3 class="font-semibold text-base md:text-lg mb-3 text-indigo-600">Integrasi Platform</h3>
+                <p class="mb-4 md:mb-6 text-gray-500 text-center text-sm md:text-base">Kangru terhubung dengan aplikasi populer untuk mendukung perjalanan karirmu.</p>
+                <div class="grid grid-cols-2 md:flex gap-3 md:gap-6 justify-center">
+                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/linkedin.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="LinkedIn">
+                    </div>
+                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/discord.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="Discord">
+                    </div>
+                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/zoom.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="Zoom">
+                    </div>
+                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/meet.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="Google Meet">
+                    </div>
                 </div>
             </div>
         </div>
+
         <!-- Card Pengguna Aktif -->
-        <div class="md:col-start-2 flex items-center justify-center -mt-8">
-            <div
-                class="relative bg-indigo-600 rounded-2xl shadow-xl p-8 flex flex-col items-center text-white overflow-hidden w-full">
+        <div class="flex items-center justify-center">
+            <div class="relative bg-indigo-600 rounded-2xl shadow-xl p-6 md:p-8 flex flex-col items-center text-white overflow-hidden w-full max-w-md md:max-w-lg">
                 <span class="absolute -top-6 -left-6 w-20 h-20 bg-indigo-400/30 rounded-full blur-2xl"></span>
                 <span class="absolute -bottom-8 -right-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></span>
                 <div class="flex flex-col items-center z-10">
-                    <span class="text-4xl md:text-110px font-extrabold mb-2 drop-shadow-lg">500k+</span>
-                    <span class="text-lg md:text-xl font-medium text-indigo-100 text-center">pengguna aktif di seluruh
-                        dunia</span>
+                    <span class="text-3xl md:text-5xl font-extrabold mb-2 drop-shadow-lg">500k+</span>
+                    <span class="text-sm md:text-xl font-medium text-indigo-100 text-center">pengguna aktif di seluruh dunia</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Jalur Karir -->
-    <section class="relative py-20 bg-gradient-to-b from-indigo-50 to-white">
+    <section class="relative py-12 md:py-20 bg-gradient-to-b from-indigo-50 to-white">
         <div class="max-w-5xl mx-auto text-center px-4">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-indigo-700">Temukan Jalur Karir Terbaik untuk Masa
-                Depanmu</h2>
-            <p class="mb-8 text-gray-600 text-lg">Kangru memberikan panduan terarah untuk membantu kamu memilih dan
+            <h2 class="text-2xl md:text-4xl font-bold mb-4 text-indigo-700 leading-tight">Temukan Jalur Karir Terbaik untuk Masa Depanmu</h2>
+            <p class="mb-6 md:mb-8 text-gray-600 text-sm md:text-lg leading-relaxed">Kangru memberikan panduan terarah untuk membantu kamu memilih dan
                 sukses di jalur karir yang paling cocok. Apakah kamu ingin langsung bekerja, melanjutkan studi, atau
                 membangun bisnis, kami hadir untuk mendukung setiap langkahmu.</p>
-            <div class="flex flex-col md:flex-row justify-center gap-6">
+            <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
                 <div
-                    class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
-                    <div class="bg-indigo-100 rounded-full p-4 mb-4">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2"
+                    class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
+                    <div class="bg-indigo-100 rounded-full p-5 mb-6 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
-                            <path
-                                d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 3.13a4 4 0 010 7.75M8 3.13a4 4 0 000 7.75" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-xl mb-2 text-indigo-700">Bekerja</h3>
-                    <p class="text-gray-500 mb-4">Dapatkan rekomendasi pekerjaan, tips CV, dan simulasi interview dari
+                    <h3 class="font-semibold text-xl mb-3 text-indigo-700">Bekerja</h3>
+                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Dapatkan rekomendasi pekerjaan, tips CV, dan simulasi interview dari
                         para ahli.</p>
                     <button
-                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-lg font-medium transition">Pilih
+                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium transition w-full max-w-xs">Pilih
                         Jalur Ini</button>
                 </div>
                 <div
-                    class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
-                    <div class="bg-indigo-100 rounded-full p-4 mb-4">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2"
+                    class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
+                    <div class="bg-indigo-100 rounded-full p-5 mb-6 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
-                            <path d="M12 14l9-5-9-5-9 5 9 5zm0 7v-6m0 0l-7-4m7 4l7-4" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-xl mb-2 text-indigo-700">Melanjutkan Studi</h3>
-                    <p class="text-gray-500 mb-4">Temukan kampus dan jurusan terbaik, serta tips beasiswa dan persiapan
+                    <h3 class="font-semibold text-xl mb-3 text-indigo-700">Melanjutkan Studi</h3>
+                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Temukan kampus dan jurusan terbaik, serta tips beasiswa dan persiapan
                         studi lanjut.</p>
                     <button
-                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-lg font-medium transition">Pilih
+                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium transition w-full max-w-xs">Pilih
                         Jalur Ini</button>
                 </div>
                 <div
-                    class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
-                    <div class="bg-indigo-100 rounded-full p-4 mb-4">
-                        <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2"
+                    class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
+                    <div class="bg-indigo-100 rounded-full p-5 mb-6 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2"
                             viewBox="0 0 24 24">
-                            <path
-                                d="M20 21v-2a4 4 0 00-3-3.87M4 21v-2a4 4 0 013-3.87M12 7V3m0 0L8.5 7.5M12 3l3.5 4.5" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
                     </div>
-                    <h3 class="font-semibold text-xl mb-2 text-indigo-700">Wirausaha</h3>
-                    <p class="text-gray-500 mb-4">Dapatkan inspirasi bisnis, panduan memulai usaha, dan mentoring dari
+                    <h3 class="font-semibold text-xl mb-3 text-indigo-700">Wirausaha</h3>
+                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Dapatkan inspirasi bisnis, panduan memulai usaha, dan mentoring dari
                         entrepreneur sukses.</p>
                     <button
-                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-lg font-medium transition">Pilih
+                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium transition w-full max-w-xs">Pilih
                         Jalur Ini</button>
                 </div>
             </div>
@@ -243,14 +330,14 @@
     </section>
 
     <!-- Advertiser Unggulan Section -->
-    <section class="max-w-6xl mx-auto px-4 md:px-0 py-20">
-        <div class="flex flex-col md:flex-row items-center gap-8">
+    <section class="max-w-6xl mx-auto px-4 py-12 md:py-20">
+        <div class="flex flex-col md:flex-row items-center gap-6 md:gap-8">
             <!-- Kiri: Teks -->
-            <div class="md:w-1/2">
-                <h2 class="text-3xl font-bold mb-4 text-gray-900">
-                    Bergabunglah bersama kami sebagai <br><span class="text-indigo-600">Advertiser Unggulan!</span>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900 leading-tight">
+                    Bergabunglah bersama kami sebagai <span class="text-indigo-600">Advertiser Unggulan!</span>
                 </h2>
-                <p class="text-gray-700 mb-6 leading-relaxed">
+                <p class="text-gray-700 mb-6 text-sm md:text-base leading-relaxed">
                     Platform kami adalah ekosistem lengkap bagi siapa pun yang serius dalam mengembangkan potensi diri
                     dan karier. Produk atau layanan Anda akan langsung tersaji kepada audiens yang sangat relevan dan
                     siap berinvestasi pada masa depan mereka.
@@ -271,9 +358,9 @@
     </section>
 
     <!-- Mentor -->
-    <section class="max-w-6xl mx-auto py-16 px-4">
-        <h2 class="text-center text-2xl font-semibold mb-10">Pilih Mentor Terbaik untuk Meraih Mimpimu</h2>
-        <div class="grid md:grid-cols-4 gap-8">
+    <section class="max-w-6xl mx-auto py-12 md:py-16 px-4">
+        <h2 class="text-center text-xl md:text-2xl font-semibold mb-8 md:mb-10">Pilih Mentor Terbaik untuk Meraih Mimpimu</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition">
                 <img src="{{ asset('assets/Sultang.png') }}"
                     class="mb-4 rounded-full h-24 w-24 object-cover border-4 border-indigo-100 shadow">
@@ -302,14 +389,13 @@
     </section>
 
     <!-- Testimoni -->
-    <section class="bg-indigo-50 py-20">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-center text-4xl font-extrabold mb-12 text-indigo-800 tracking-wide drop-shadow-md">Apa kata
-                lulusan</h2>
-            <div class="grid md:grid-cols-2 gap-16 items-start">
+    <section class="bg-indigo-50 py-12 md:py-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-center text-2xl md:text-4xl font-extrabold mb-8 md:mb-12 text-indigo-800 tracking-wide drop-shadow-md">Apa kata lulusan</h2>
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8 items-stretch">
                 <!-- Testimoni 1 -->
                 <div
-                    class="flex flex-col items-center text-center bg-white rounded-3xl shadow-2xl p-8 hover:shadow-indigo-400 transition-shadow duration-300">
+                    class="flex flex-col items-center text-center bg-white rounded-3xl shadow-2xl p-8 hover:shadow-indigo-400 transition-shadow duration-300 h-full">
                     <img src="{{ asset('assets/rafi.png') }}" alt="Malika Lathifa"
                         class="mb-6 rounded-full h-28 w-28 object-cover border-4 border-indigo-200 shadow-lg">
                     <span class="text-2xl font-bold text-indigo-700 mb-3">Rafi Islami</span>
@@ -324,7 +410,7 @@
                             @endfor
                         </span>
                     </div>
-                    <p class="text-gray-800 leading-relaxed text-lg font-small italic">
+                    <p class="text-gray-800 leading-relaxed text-lg font-small italic flex-grow">
                         "Kangru benar-benar membantu saya memahami potensi diri dan menentukan pilihan karir yang tepat.
                         Dengan fitur-fiturnya yang interaktif dan informatif, saya bisa mengeksplorasi berbagai peluang
                         kerja yang sesuai dengan minat dan kemampuan saya. Aplikasi ini seperti teman yang selalu siap
@@ -334,7 +420,7 @@
                 </div>
                 <!-- Testimoni 2 -->
                 <div
-                    class="flex flex-col items-center text-center bg-white rounded-3xl shadow-2xl p-8 hover:shadow-indigo-400 transition-shadow duration-300">
+                    class="flex flex-col items-center text-center bg-white rounded-3xl shadow-2xl p-8 hover:shadow-indigo-400 transition-shadow duration-300 h-full">
                     <img src="{{ asset('assets/ipul.png') }}" alt="Charlotte Isabella"
                         class="mb-6 rounded-full h-28 w-28 object-cover border-4 border-indigo-200 shadow-lg">
                     <span class="text-2xl font-bold text-indigo-700 mb-3">Saifulloh Fattah</span>
@@ -349,7 +435,7 @@
                             @endfor
                         </span>
                     </div>
-                    <p class="text-gray-800 leading-relaxed text-lg font-small italic">
+                    <p class="text-gray-800 leading-relaxed text-lg font-small italic flex-grow">
                         "Saya sangat terbantu dengan Kangru! Aplikasi ini memberikan wawasan yang jelas tentang berbagai
                         jalur karir yang cocok dengan kepribadian dan keterampilan saya. Panduannya mudah dipahami, dan
                         saya merasa lebih percaya diri dalam mengambil langkah menuju masa depan. Rasanya seperti punya
@@ -362,9 +448,9 @@
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="max-w-4xl mx-auto py-16 px-4" x-data="{ openIndex: null }">
-        <h2 class="text-center text-2xl font-semibold mb-8">Pertanyaan yang Sering Diajukan</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section id="faq" class="max-w-4xl mx-auto py-12 md:py-16 px-4" x-data="{ openIndex: null }">
+        <h2 class="text-center text-xl md:text-2xl font-semibold mb-6 md:mb-8">Pertanyaan yang Sering Diajukan</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <template
                 x-for="(faq, index) in [
                 { question: 'Apa itu Kangru?', answer: 'Kangru adalah platform bimbingan karir berbasis AI dan MBTI.' },

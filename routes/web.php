@@ -50,10 +50,10 @@ Route::controller(ArticleController::class)->group(function () {
 
 Route::controller(AuthAdvertiserController::class)->middleware('guest')->group(function () {
     Route::get('/advertiser/register', 'register')->name('advertiser.register');
-    Route::post('/advertiser/resgiter/post', 'postregister')->name('advertiser.postregister');
+    Route::post('/advertiser/register/post', 'postregister')->name('advertiser.postregister');
 });
 
-Route::controller(AdvertiserController::class)->middleware('auth')->group(function () {
+Route::controller(AdvertiserController::class)->middleware(['auth'])->group(function () {
     Route::get('/advertiser', 'index')->name('advertiser.index');
 });
 
