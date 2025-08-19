@@ -14,8 +14,11 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all();
+        $bekerja_articles = Article::where('category_id', 2)->get();
+        $wirausaha_articles = Article::where('category_id', 3)->get();
+        $kuliah_articles = Article::where('category_id', 1)->get();
 
-        return view('article.index', compact('articles'));
+        return view('article.index', compact('articles', 'bekerja_articles', 'wirausaha_articles', 'kuliah_articles'));
     }
 
     public function create()
@@ -52,7 +55,7 @@ class ArticleController extends Controller
                 'upload_date' => $request->upload_date,
             ]);
 
-            $image->storeAs('public/article/'.$hashids->encode($article->id).'_'.$image_name);
+            $image->storeAs('public/article/' . $hashids->encode($article->id) . '_' . $image_name);
         } else {
             Article::create([
                 'title' => $request->title,
@@ -102,7 +105,7 @@ class ArticleController extends Controller
                 File::makeDirectory($directory, 0755, true);
             }
 
-            $image_path = 'article/'.$article_id.'_'.$article->image;
+            $image_path = 'article/' . $article_id . '_' . $article->image;
 
             if (Storage::disk('public')->exists($image_path)) {
                 Storage::disk('public')->delete($image_path);
@@ -115,7 +118,7 @@ class ArticleController extends Controller
                 'category_id' => $request->category_id,
             ]);
 
-            $image->storeAs('public/article/'.$article_id.'_'.$image_name);
+            $image->storeAs('public/article/' . $article_id . '_' . $image_name);
         } else {
             $article->update([
                 'title' => $request->title,
@@ -133,7 +136,7 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
 
         if ($article->image) {
-            $image_path = 'article/'.$article_id.'_'.$article->image;
+            $image_path = 'article/' . $article_id . '_' . $article->image;
 
             if (Storage::disk('public')->exists($image_path)) {
                 Storage::disk('public')->delete($image_path);
@@ -150,7 +153,7 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
 
         if ($article->image) {
-            $image_path = 'article/'.$article_id.'_'.$article->image;
+            $image_path = 'article/' . $article_id . '_' . $article->image;
 
             if (Storage::disk('public')->exists($image_path)) {
                 Storage::disk('public')->delete($image_path);
