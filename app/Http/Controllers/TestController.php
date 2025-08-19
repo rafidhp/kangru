@@ -143,7 +143,7 @@ class TestController extends Controller
         $description = trim($response2->json('candidates.0.content.parts.0.text'));
 
         // prompt and response 3
-        $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, \n {$answersText} dan data yang saya miliki terutama pada pertanyaan nomor 9-15, berikan saran dan rekomendasi lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? (contohnya jika terdapat unsur olahraga, tidak menutup kemungkinan untuk menjadi atlet, dan untuk unsur yang lainnya pun begitu). Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar";
+        $prompt3 = "Berdasarkan tipe MBTI {$mbtiType}, \n {$answersText} dan data yang saya miliki terutama pada pertanyaan nomor 9-15, berikan saran dan rekomendasi lebih baik saya bekerja, berwirausaha, atau melanjutkan studi? (contohnya jika terdapat unsur olahraga, tidak menutup kemungkinan untuk menjadi atlet, dan untuk unsur yang lainnya pun begitu). Jelaskan alasannya, dan sebutkan juga contoh pekerjaan, jurusan, atau usaha yang cocok. Sebutkan secara singkat, jelas dan tidak perlu ada kata pengantar. Jika PERLU dibuat list maka dibuat, jika TIDAK PERLU maka tidak perlu dibuat list, dan jika dibuat list, buatlah formatnya serapih mungkin, penerapan styling seperti bold hanya untuk poin-poin penting saja juga harus sangat diperhatikan.";
         $response3 = Http::post($api_url, [
             'contents' => [['parts' => [['text' => $prompt3]]]],
         ]);
@@ -254,6 +254,7 @@ class TestController extends Controller
         $description = $user[0]->mbti_desc;
         $recommendation = $user[0]->recommendation_career;
         $recommendedArticlesIds = json_decode($user[0]->recommended_articles, true);
+        $recommendedAdsIds = json_decode($user[0]->recommended_ads, true);
 
         if (is_array($recommendedArticlesIds) && count($recommendedArticlesIds)) {
             $recommendedArticles = Article::whereIn('id', $recommendedArticlesIds)->get();
@@ -261,6 +262,12 @@ class TestController extends Controller
             $recommendedArticles = collect();
         }
 
-        return view('mbti_test.result', compact('mbtiType', 'description', 'recommendation', 'recommendedArticles'));
+        if (is_array($recommendedAdsIds) && count($recommendedAdsIds)) {
+            $recommendedAds = Advertisement::whereIn('id', $recommendedAdsIds)->get();
+        } else {
+            $recommendedAds = collect();
+        }
+
+        return view('mbti_test.result', compact('mbtiType', 'description', 'recommendation', 'recommendedArticles', 'recommendedAds'));
     }
 }
