@@ -8,5 +8,8 @@
 
 # php artisan storage:link
 
+php artisan config:clear
+php artisan cache:clear
+
 # Start apache
 exec apache2-foreground
