@@ -117,7 +117,7 @@ class TestController extends Controller
         $api_url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey";
 
         // prompt and response 1
-        $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya (contohnya seperti INFJ-T, ESTP-A, dst.) tanpa penjelasan.";
+        $prompt1 = "Berdasarkan jawaban berikut:\n\n{$answersText}\n\nJawab hanya satu kata, tipe MBTI saya (contohnya seperti INFJ-T, ESTP-A, dst.) tanpa penjelasan. Meskipun tidak mungkin menentukan informasi MBTI hanya dengan informasi yang diberikan.";
         $response1 = Http::post($api_url, [
             'contents' => [['parts' => [['text' => $prompt1]]]],
         ]);

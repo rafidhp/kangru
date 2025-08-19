@@ -10,7 +10,8 @@
     <link rel="shortcut icon" href="{{ asset('assets/logo.png') }}" type="image/x-icon">
 </head>
 
-<body class="bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 text-gray-900 font-sans min-h-screen py-12 flex flex-col items-center justify-center px-4">
+<body
+    class="bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 text-gray-900 font-sans min-h-screen py-12 flex flex-col items-center justify-center px-4">
 
     @if (Auth::user()->mbti_type != null)
         <div class="bg-white shadow-2xl rounded-3xl max-w-3xl w-full p-10">
@@ -30,13 +31,17 @@
                 @if (isset($recommendedArticles) && $recommendedArticles->count() > 0)
                     <ul class="list-disc list-inside space-y-2">
                         @foreach ($recommendedArticles as $article)
-                            <li>
-                                <a href="{{ route('article.show', $article->id) }}"
-                                    class="text-purple-600 hover:underline">
-                                    {{ $article->title }}
-                                </a>
-                                <p class="text-sm text-gray-600">{{ Str::limit($article->content ?? '', 100) }}</p>
-                            </li>
+                            <a href="{{ route('article.show', ['article_id' => $article->hashid]) }}">
+                                <li>
+                                    <span class="text-purple-600 hover:underline">
+                                        {{ $article->title }}
+                                    </span>
+                                    <br>
+                                    <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
+                                        alt="article image" style="width: 150px">
+                                    <p class="text-sm text-gray-600">{{ Str::limit($article->content ?? '', 100) }}</p>
+                                </li>
+                            </a>
                         @endforeach
                     </ul>
                 @else

@@ -13,6 +13,7 @@
         html {
             font-size: 14px;
         }
+
         @media (min-width: 640px) {
             html {
                 font-size: 16px;
@@ -34,6 +35,7 @@
         .responsive-grid {
             gap: 1rem;
         }
+
         @media (min-width: 768px) {
             .responsive-grid {
                 gap: 2rem;
@@ -44,6 +46,7 @@
         .responsive-padding {
             padding: 1.5rem;
         }
+
         @media (min-width: 768px) {
             .responsive-padding {
                 padding: 3rem;
@@ -55,6 +58,7 @@
             font-size: 1.125rem;
             line-height: 1.75rem;
         }
+
         @media (min-width: 768px) {
             .responsive-text {
                 font-size: 1.25rem;
@@ -67,6 +71,7 @@
             padding: 0.75rem 1.5rem;
             font-size: 0.875rem;
         }
+
         @media (min-width: 768px) {
             .responsive-button {
                 padding: 1rem 2rem;
@@ -90,8 +95,10 @@
         <!-- Mobile menu button -->
         <button @click="open = !open" class="md:hidden p-2">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h16"></path>
+                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
 
@@ -161,9 +168,11 @@
 
     <!-- Hero -->
     <section class="relative py-8 md:py-20 bg-gradient-to-b from-white to-indigo-50">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-start justify-center gap-6 md:gap-8">
+        <div
+            class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-start justify-center gap-6 md:gap-8">
             <!-- Kiri: Keterangan & Tombol -->
-            <div class="flex-1 flex flex-col items-center md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2 text-center md:text-left">
+            <div
+                class="flex-1 flex flex-col items-center md:items-start justify-center md:justify-center md:pr-8 order-2 md:order-1 w-full md:w-1/2 text-center md:text-left">
                 <h1 class="text-2xl md:text-4xl font-bold mb-4 leading-tight">
                     Mulailah Perjalanan Karir Anda bersama <span class="text-indigo-600">Kangru</span>
                 </h1>
@@ -189,16 +198,20 @@
                 <!-- Logo Integrasi -->
                 <div class="flex flex-wrap justify-center items-center gap-4 md:gap-12 mt-2">
                     <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="LinkedIn">
+                        <img src="{{ asset('assets/linkedin.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain"
+                            alt="LinkedIn">
                     </div>
                     <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="Discord">
+                        <img src="{{ asset('assets/discord.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain"
+                            alt="Discord">
                     </div>
                     <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="Zoom">
+                        <img src="{{ asset('assets/zoom.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain"
+                            alt="Zoom">
                     </div>
                     <div class="flex items-center justify-center h-12 w-12 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain" alt="Google Meet">
+                        <img src="{{ asset('assets/meet.png') }}" class="h-12 w-12 md:h-20 md:w-20 object-contain"
+                            alt="Google Meet">
                     </div>
                 </div>
             </div>
@@ -213,7 +226,8 @@
     <section class="max-w-6xl mx-auto px-4 py-12 md:py-20">
         <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-8 md:mb-12">
             <div>
-                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-indigo-700 text-center md:text-left">Kenali Potensimu, Wujudkan Mimpimu!</h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4 text-indigo-700 text-center md:text-left">Kenali
+                    Potensimu, Wujudkan Mimpimu!</h2>
                 <p class="mb-6 text-gray-600 text-sm md:text-lg leading-relaxed text-center md:text-left">
                     Lebih dari sekadar aplikasi karir. Dengan AI dan MBTI, Kangru memberikan rekomendasi rencana pribadi
                     sesuai minat, bakat, dan impianmu: Bekerja, Studi, atau Wirausaha.
@@ -235,19 +249,28 @@
             </div>
             <div class="bg-white/80 shadow-xl rounded-2xl p-6 md:p-8 flex flex-col items-center">
                 <h3 class="font-semibold text-base md:text-lg mb-3 text-indigo-600">Integrasi Platform</h3>
-                <p class="mb-4 md:mb-6 text-gray-500 text-center text-sm md:text-base">Kangru terhubung dengan aplikasi populer untuk mendukung perjalanan karirmu.</p>
+                <p class="mb-4 md:mb-6 text-gray-500 text-center text-sm md:text-base">Kangru terhubung dengan aplikasi
+                    populer untuk mendukung perjalanan karirmu.</p>
                 <div class="grid grid-cols-2 md:flex gap-3 md:gap-6 justify-center">
-                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/linkedin.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="LinkedIn">
+                    <div
+                        class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/linkedin.png') }}"
+                            class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="LinkedIn">
                     </div>
-                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/discord.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="Discord">
+                    <div
+                        class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/discord.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain"
+                            alt="Discord">
                     </div>
-                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/zoom.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="Zoom">
+                    <div
+                        class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/zoom.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain"
+                            alt="Zoom">
                     </div>
-                    <div class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
-                        <img src="{{ asset('assets/meet.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain" alt="Google Meet">
+                    <div
+                        class="bg-gray-50 rounded-xl shadow p-2 md:p-3 flex items-center justify-center h-16 w-16 md:h-20 md:w-20">
+                        <img src="{{ asset('assets/meet.png') }}" class="h-10 w-10 md:h-12 md:w-12 object-contain"
+                            alt="Google Meet">
                     </div>
                 </div>
             </div>
@@ -255,12 +278,14 @@
 
         <!-- Card Pengguna Aktif -->
         <div class="flex items-center justify-center">
-            <div class="relative bg-indigo-600 rounded-2xl shadow-xl p-6 md:p-8 flex flex-col items-center text-white overflow-hidden w-full max-w-md md:max-w-lg">
+            <div
+                class="relative bg-indigo-600 rounded-2xl shadow-xl p-6 md:p-8 flex flex-col items-center text-white overflow-hidden w-full max-w-md md:max-w-lg">
                 <span class="absolute -top-6 -left-6 w-20 h-20 bg-indigo-400/30 rounded-full blur-2xl"></span>
                 <span class="absolute -bottom-8 -right-8 w-32 h-32 bg-white/10 rounded-full blur-2xl"></span>
                 <div class="flex flex-col items-center z-10">
                     <span class="text-3xl md:text-5xl font-extrabold mb-2 drop-shadow-lg">500k+</span>
-                    <span class="text-sm md:text-xl font-medium text-indigo-100 text-center">pengguna aktif di seluruh dunia</span>
+                    <span class="text-sm md:text-xl font-medium text-indigo-100 text-center">pengguna aktif di seluruh
+                        dunia</span>
                 </div>
             </div>
         </div>
@@ -269,8 +294,10 @@
     <!-- Jalur Karir -->
     <section class="relative py-12 md:py-20 bg-gradient-to-b from-indigo-50 to-white">
         <div class="max-w-5xl mx-auto text-center px-4">
-            <h2 class="text-2xl md:text-4xl font-bold mb-4 text-indigo-700 leading-tight">Temukan Jalur Karir Terbaik untuk Masa Depanmu</h2>
-            <p class="mb-6 md:mb-8 text-gray-600 text-sm md:text-lg leading-relaxed">Kangru memberikan panduan terarah untuk membantu kamu memilih dan
+            <h2 class="text-2xl md:text-4xl font-bold mb-4 text-indigo-700 leading-tight">Temukan Jalur Karir Terbaik
+                untuk Masa Depanmu</h2>
+            <p class="mb-6 md:mb-8 text-gray-600 text-sm md:text-lg leading-relaxed">Kangru memberikan panduan terarah
+                untuk membantu kamu memilih dan
                 sukses di jalur karir yang paling cocok. Apakah kamu ingin langsung bekerja, melanjutkan studi, atau
                 membangun bisnis, kami hadir untuk mendukung setiap langkahmu.</p>
             <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
@@ -284,11 +311,12 @@
                         </svg>
                     </div>
                     <h3 class="font-semibold text-xl mb-3 text-indigo-700">Bekerja</h3>
-                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Dapatkan rekomendasi pekerjaan, tips CV, dan simulasi interview dari
+                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Dapatkan rekomendasi pekerjaan, tips CV,
+                        dan simulasi interview dari
                         para ahli.</p>
-                    <button
+                    <a href="{{ route('article.index') }}/#bekerja"
                         class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium transition w-full max-w-xs">Pilih
-                        Jalur Ini</button>
+                        Jalur Ini</a>
                 </div>
                 <div
                     class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
@@ -300,11 +328,12 @@
                         </svg>
                     </div>
                     <h3 class="font-semibold text-xl mb-3 text-indigo-700">Melanjutkan Studi</h3>
-                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Temukan kampus dan jurusan terbaik, serta tips beasiswa dan persiapan
+                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Temukan kampus dan jurusan terbaik, serta
+                        tips beasiswa dan persiapan
                         studi lanjut.</p>
-                    <button
+                    <a href="{{ route('article.index') }}/#study"
                         class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium transition w-full max-w-xs">Pilih
-                        Jalur Ini</button>
+                        Jalur Ini</a>
                 </div>
                 <div
                     class="flex-1 bg-white rounded-2xl shadow-lg p-8 flex flex-col items-center text-center hover:scale-105 transition-transform duration-200 border-2 border-transparent hover:border-indigo-200">
@@ -316,11 +345,12 @@
                         </svg>
                     </div>
                     <h3 class="font-semibold text-xl mb-3 text-indigo-700">Wirausaha</h3>
-                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Dapatkan inspirasi bisnis, panduan memulai usaha, dan mentoring dari
+                    <p class="text-gray-500 mb-6 text-center leading-relaxed">Dapatkan inspirasi bisnis, panduan
+                        memulai usaha, dan mentoring dari
                         entrepreneur sukses.</p>
-                    <button
+                    <a href="{{ route('article.index') }}/#wirausaha"
                         class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-lg font-medium transition w-full max-w-xs">Pilih
-                        Jalur Ini</button>
+                        Jalur Ini</a>
                 </div>
             </div>
         </div>
@@ -359,7 +389,8 @@
 
     <!-- Mentor -->
     <section class="max-w-6xl mx-auto py-12 md:py-16 px-4">
-        <h2 class="text-center text-xl md:text-2xl font-semibold mb-8 md:mb-10">Pilih Mentor Terbaik untuk Meraih Mimpimu</h2>
+        <h2 class="text-center text-xl md:text-2xl font-semibold mb-8 md:mb-10">Pilih Mentor Terbaik untuk Meraih
+            Mimpimu</h2>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-xl transition">
                 <img src="{{ asset('assets/Sultang.png') }}"
@@ -391,7 +422,9 @@
     <!-- Testimoni -->
     <section class="bg-indigo-50 py-12 md:py-20">
         <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-center text-2xl md:text-4xl font-extrabold mb-8 md:mb-12 text-indigo-800 tracking-wide drop-shadow-md">Apa kata lulusan</h2>
+            <h2
+                class="text-center text-2xl md:text-4xl font-extrabold mb-8 md:mb-12 text-indigo-800 tracking-wide drop-shadow-md">
+                Apa kata lulusan</h2>
             <div class="grid md:grid-cols-2 gap-6 md:gap-8 items-stretch">
                 <!-- Testimoni 1 -->
                 <div
