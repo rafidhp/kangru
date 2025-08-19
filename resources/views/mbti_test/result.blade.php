@@ -10,21 +10,20 @@
     <link rel="shortcut icon" href="{{ asset('assets/logo.png') }}" type="image/x-icon">
 </head>
 
-<body
-    class="bg-gradient-to-br from-purple-50 via-white to-purple-50 text-gray-900 font-sans min-h-screen py-12 flex flex-col items-center justify-center px-4">
+<body class="bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 text-gray-900 font-sans min-h-screen py-12 flex flex-col items-center justify-center px-4">
 
     @if (Auth::user()->mbti_type != null)
-        <div class="bg-white shadow-2xl rounded-3xl max-w-3xl w-full p-10 prose prose-purple">
+        <div class="bg-white shadow-2xl rounded-3xl max-w-3xl w-full p-10">
             <h1 class="text-3xl font-extrabold mb-6 text-center tracking-wide drop-shadow-md">Hasil MBTI Kamu</h1>
 
             <h2 class="text-2xl font-semibold mt-4">Tipe MBTI:</h2>
-            <p class="text-4xl font-extrabold text-center text-purple-700 tracking-wide">{{ $mbtiType }}</p>
+            <p class="text-4xl font-extrabold text-center text-purple-700 tracking-wide">{{ $mbtiType ?? 'INTJ' }}</p>
 
             <h2 class="text-2xl font-semibold mt-10">Penjelasan:</h2>
-            <div class="mt-2 leading-relaxed text-gray-800">{!! $description !!}</div>
+            <div class="mt-2 leading-relaxed text-gray-800">{!! $description ?? 'Deskripsi kepribadian akan ditampilkan di sini.' !!}</div>
 
             <h2 class="text-2xl font-semibold mt-10">Rekomendasi:</h2>
-            <div class="mt-2 leading-relaxed text-gray-800">{!! $recommendation !!}</div>
+            <div class="mt-2 leading-relaxed text-gray-800">{!! $recommendation ?? 'Rekomendasi akan ditampilkan di sini.' !!}</div>
 
             <h2 class="text-2xl font-semibold mt-10">Rekomendasi Artikel:</h2>
             <div class="mt-2 leading-relaxed text-gray-800">
@@ -44,33 +43,14 @@
                     <p>Tidak ada rekomendasi artikel saat ini.</p>
                 @endif
             </div>
+
+            <div class="text-center mt-12">
+                <a href="{{ route('dashboard') }}"
+                    class="px-10 py-3 bg-purple-700 text-white rounded-3xl shadow-lg hover:bg-purple-800 transition duration-300 ease-in-out">Kembali</a>
+            </div>
         </div>
-
-        @if ($recommendedArticles->isEmpty())
-            <p>Belum ada artikel rekomendasi.</p>
-        @else
-            <p>Rekomendasi artikel untuk anda</p>
-            <ul>
-                @foreach ($recommendedArticles as $article)
-                    <li>{{ $article->title }}</li>
-                    <li>
-                        @if ($article->image != null)
-                            <img src="{{ asset('storage/article/' . $article->hashid . '_' . $article->image) }}"
-                                alt="article_img" style="width: 150px">
-                        @else
-                            <img src="{{ asset('/storage/article/article_template.jpg') }}" alt="article_template"
-                                style="width: 150px">
-                        @endif
-                    </li>
-                    <li><a href="{{ route('article.show', ['article_id' => $article->hashid]) }}">Baca artikel</a></li>
-                @endforeach
-            </ul>
-        @endif
-
-        <a href="{{ route('dashboard') }}"
-            class="mt-12 px-10 py-3 bg-purple-700 text-white rounded-3xl shadow-lg hover:bg-purple-800 transition duration-300 ease-in-out">Kembali</a>
     @else
-        <div class="bg-white shadow-2xl rounded-3xl max-w-3xl w-full p-10 prose prose-purple text-center">
+        <div class="bg-white shadow-2xl rounded-3xl max-w-3xl w-full p-10 text-center">
             <h1 class="text-3xl font-extrabold mb-6 tracking-wide drop-shadow-md">Anda harus melakukan tes MBTI dulu!
             </h1>
             <a href="{{ url('/mbti-test') }}"
